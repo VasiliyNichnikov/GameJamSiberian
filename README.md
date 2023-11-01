@@ -6,4 +6,4 @@
 
 OS: Windows
 
-Ссылка на [Weeek](https://app.weeek.net/?ws-id=457480&invite-code=CVfVIRfZAHjTmWck&lang=ru-RU&utm_source=sharelink&utm_medium=users&utm_campaign=457480)
+Ссылка на [Weeek](https://app.weeek.net/?ws-id=460494&invite-code=VeV5ALfw5bVrIoRC&lang=ru-RU&utm_source=sharelink&utm_medium=tm&utm_campaign=460494)
