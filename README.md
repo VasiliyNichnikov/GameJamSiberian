@@ -1,4 +1,4 @@
-# GameJamVologda
+# GameJamSiberian
 
 Проект создается в рамках [GameJam](https://discord.gg/F3E9n2GQ8A) командой "СНТ-Березки-10"
 
