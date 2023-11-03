@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7700dca8f944961b4904ec92b78be50, type: 3}
+  m_Name: MessengerData
+  m_EditorClassIdentifier: 
+  _chats:
+  - _userType: 1
+    _messages:
+    - _messageSendingData: {fileID: 11400000, guid: ba44c71851bfa644cb1dea237c6ab8de, type: 2}
+      _messageResponseData: {fileID: 0}
+    - _messageSendingData: {fileID: 0}
+      _messageResponseData: {fileID: 11400000, guid: d2cb87b2067f18b4786cf9f8960e4dcb, type: 2}
+    - _messageSendingData: {fileID: 11400000, guid: 4e1d51d7fa7555048bdef6f6fcb37f93, type: 2}
+      _messageResponseData: {fileID: 0}
+  _users:
+  - _userName: "\u041D\u0430\u0447\u0430\u043B\u044C\u043D\u0438\u043A"
+    _userIcon: {fileID: 21300000, guid: 1129e8d317cbf6a4995c2fb1559a2d09, type: 3}
+    _userType: 0
