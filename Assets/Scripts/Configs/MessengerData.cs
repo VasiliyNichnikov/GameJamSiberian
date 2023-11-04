@@ -16,10 +16,12 @@ namespace Configs
         public struct UserData
         {
             public string Name => _userName;
+            public string Surname => _userSurname;
             public Sprite Icon => _userIcon;
             public UserType Type => _userType;
             
             [SerializeField] private string _userName;
+            [SerializeField] private string _userSurname;
             [SerializeField] private Sprite _userIcon;
             [SerializeField] private UserType _userType;
         }

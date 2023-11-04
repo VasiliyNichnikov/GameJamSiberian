@@ -1,7 +1,6 @@
 ﻿#nullable enable
-using UI.Programs.Messenger;
-using UI.Programs.Messenger.View;
-using UI.Programs.Messenger.ViewModel;
+using UI.Programs.TrelloMiniGame.View;
+using UI.Programs.TrelloMiniGame.ViewModel;
 
 namespace Game
 {
@@ -11,17 +10,10 @@ namespace Game
     /// </summary>
     public class GameLoader
     {
-        private readonly MessengerFacade _messengerFacade;
-        
-        public GameLoader()
-        {
-            _messengerFacade = new MessengerFacade();
-        }
-
         public void LoadGame()
         {
-            var dialog = Main.Instance.GuiManager.ShowDialog<MessengerDialog>();
-            dialog.Init(new MessengerViewModel(_messengerFacade));
+            var dialog = Main.Instance.GuiManager.ShowDialog<TrelloMiniGameDialog>();
+            dialog.Init(new TrelloMiniGameViewModel());
         }
     }
 }

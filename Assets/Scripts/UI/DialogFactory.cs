@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UI.Programs.Messenger.View;
+using UI.Programs.TrelloMiniGame.View;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,6 +13,7 @@ namespace UI
         private readonly Dictionary<Type, string> _dialogsPath = new()
         {
             { typeof(MessengerDialog), "Prefabs/UI/Messenger/MessengerDialog" },
+            { typeof(TrelloMiniGameDialog), "Prefabs/UI/TrelloMiniGame/TrelloMiniGameDialog" },
         };
 
         private readonly Transform _parentDialogs;
