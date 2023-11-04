@@ -59,9 +59,11 @@ namespace UI.Programs.InstallerIDE.ViewModel
                     if (_missionIsComplete)
                     {
                         _currentState = PageState.SelectionDisk;
+                        _missionIsComplete = false;
                     }
                     break;
                 case PageState.SelectionDisk:
+                    _missionIsComplete = _missionLogicViewModel.ChangeDiskLogic(_diskSelectionViewModel.GetSelectedDiskState());
                     if (_missionIsComplete)
                     {
                         _currentState = PageState.DeselectToggles;

@@ -34,6 +34,7 @@ namespace UI.Programs.InstallerIDE.ViewModel
 
         private void OnClickDisk(int indexDisk)
         {
+            Debug.Log(indexDisk);
             var listIndex = indexDisk - 1;
             if (listIndex < 0 || listIndex >= _disks.Count)
             {
@@ -48,6 +49,17 @@ namespace UI.Programs.InstallerIDE.ViewModel
             var selectedDisk = _disks[listIndex];
             selectedDisk.SelectDisk();
             _selectedDisk.Value = selectedDisk;
+        }
+
+        public bool GetSelectedDiskState()
+        {
+            if (_selectedDisk.Value != null)
+            {
+                if (_selectedDisk.Value.IsCorrectedDisk == true)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

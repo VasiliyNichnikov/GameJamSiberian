@@ -27,10 +27,12 @@ namespace UI.Programs.InstallerIDE.ViewModel
             AmountOfSpace = string.Format(data.AmountOfSpace, freeStorage, MaxStorageGB);
             IsCorrectedDisk = isCorrectedDisk;
             _onClickHandler = onClickHandler;
+            
         }
 
         public void OnClickHandler() => _onClickHandler.Invoke();
-        
+
+
         public void SelectDisk()
         {
             _isSelected.Value = true;
@@ -40,5 +42,9 @@ namespace UI.Programs.InstallerIDE.ViewModel
         {
             _isSelected.Value = false;
         }
+
+        
+
+
     }
 }

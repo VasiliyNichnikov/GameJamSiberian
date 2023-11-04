@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System.Collections.Generic;
 using UI.Programs.InstallerIDE.ViewModel;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -14,7 +15,7 @@ namespace UI.Programs.InstallerIDE.View
         [SerializeField] private DiskBlockView _diskBlockPrefab = null!;
         
         private IDiskSelectionViewModel _viewModel = null!;
-        
+
         public void Init(IDiskSelectionViewModel viewModel)
         {
             _viewModel = viewModel;
