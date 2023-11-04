@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UI.Desktop.View;
+using UI.Programs.InstallerIDE.View;
 using UI.Programs.Messenger.View;
 using UI.Programs.TrelloMiniGame.View;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace UI
             { typeof(MessengerDialog), "Prefabs/UI/Messenger/MessengerDialog" },
             { typeof(TrelloMiniGameDialog), "Prefabs/UI/TrelloMiniGame/TrelloMiniGameDialog" },
             { typeof(DesktopDialog), "Prefabs/UI/Desktop/DesktopDialog" },
+            { typeof(InstallerIDEDialog), "Prefabs/UI/InstallerIDE/InstallerIdeDialog" },
         };
 
         private readonly Transform _parentDialogs;

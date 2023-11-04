@@ -1,11 +1,4 @@
 ﻿#nullable enable
-using Configs;
-using ProgramsLogic;
-using UI.Desktop;
-using UI.Desktop.View;
-using UI.Desktop.ViewModel;
-using UI.Programs.Messenger;
-using UnityEngine;
 
 namespace Game
 {

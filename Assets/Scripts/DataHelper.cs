@@ -11,11 +11,13 @@ public class DataHelper: MonoBehaviour
     public TrelloMiniGameData TrelloMiniGameData => _trelloMiniGameData;
     public ProgramsIconData ProgramsIconData => _programsIconData;
     public PlotData PlotData => _plotData;
+    public InstallerMiniGameData InstallerData => _installerMiniGameData;
     
     [SerializeField] private MessengerData _messengerData = null!;
     [SerializeField] private TrelloMiniGameData _trelloMiniGameData = null!;
     [SerializeField] private ProgramsIconData _programsIconData = null!;
     [SerializeField] private PlotData _plotData = null!;
+    [SerializeField] private InstallerMiniGameData _installerMiniGameData = null!;
     
     private void Awake()
     {
