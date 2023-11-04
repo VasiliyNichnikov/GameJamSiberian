@@ -33,6 +33,7 @@ public class Main : MonoBehaviour
     {
         // Порядок важен
         _guiManager.Init(_sceneData.DialogsParent);
+        
         _gameLoader.LoadGame();
     }
 }

@@ -40,8 +40,7 @@ namespace UI
                 Debug.LogError("DialogsManager.RemoveDialog dialog not contains in list");
                 return;
             }
-
-            dialog.Dispose();
+            
             dialog.gameObject.SetActive(false);
             _openDialogs.Remove(dialog);
             Destroy(dialog.gameObject);

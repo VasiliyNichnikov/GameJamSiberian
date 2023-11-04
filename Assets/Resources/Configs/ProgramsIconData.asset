@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20baf7c5d7b0404cb949018d4d91430f, type: 3}
+  m_Name: ProgramsIconData
+  m_EditorClassIdentifier: 
+  _programIcons:
+  - _type: 0
+    _sprite: {fileID: 21300000, guid: b7cadfe2aeafcba42b4b46b8e36c2ae3, type: 3}
+    _name: "\u0418\u0437\u0431\u0430-\u0441\u0435\u0440\u0444"
+  - _type: 1
+    _sprite: {fileID: 21300000, guid: 800b9689684779a4298e419a7addb64e, type: 3}
+    _name: "\u041B\u0430\u0441\u0442\u043E\u0447\u043A\u0430"
+  - _type: 2
+    _sprite: {fileID: 21300000, guid: 72c3bc5a3ba3eab49bdb6dfb32423e84, type: 3}
+    _name: "\u042F\u041F"

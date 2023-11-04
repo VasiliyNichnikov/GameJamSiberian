@@ -26,5 +26,10 @@ namespace UI
         {
             // override me
         }
+
+        private void OnDestroy()
+        {
+            Dispose();
+        }
     }
 }

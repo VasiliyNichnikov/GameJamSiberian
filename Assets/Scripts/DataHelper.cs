@@ -8,10 +8,12 @@ public class DataHelper: MonoBehaviour
     
     public MessengerData MessengerData => _messengerData;
     public TrelloMiniGameData TrelloMiniGameData => _trelloMiniGameData;
+    public ProgramsIconData ProgramsIconData => _programsIconData;
 
     [SerializeField] private MessengerData _messengerData = null!;
     [SerializeField] private TrelloMiniGameData _trelloMiniGameData = null!;
-
+    [SerializeField] private ProgramsIconData _programsIconData = null!;
+    
     private void Awake()
     {
         Instance = this;
