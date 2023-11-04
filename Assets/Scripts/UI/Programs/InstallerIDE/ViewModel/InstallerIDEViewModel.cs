@@ -35,7 +35,9 @@ namespace UI.Programs.InstallerIDE.ViewModel
         private readonly DiskSelectionViewModel _diskSelectionViewModel;
         private readonly DeselectTogglesViewModel _deselectTogglesViewModel;
         private readonly InstallationViewModel _installationViewModel;
+        private readonly MissionLogicViewModel _missionLogicViewModel;
         private PageState _currentState = PageState.Welcome;
+        private bool _missionIsComplete = true;
 
         public InstallerIDEViewModel()
         {
@@ -43,7 +45,9 @@ namespace UI.Programs.InstallerIDE.ViewModel
             _diskSelectionViewModel = new DiskSelectionViewModel();
             _deselectTogglesViewModel = new DeselectTogglesViewModel();
             _installationViewModel = new InstallationViewModel(CompletingInstallation);
-            
+            _missionLogicViewModel = new MissionLogicViewModel();
+
+
             SetPageView(_currentState);
         }
         
@@ -52,13 +56,24 @@ namespace UI.Programs.InstallerIDE.ViewModel
             switch (_currentState)
             {
                 case PageState.Welcome:
-                    _currentState = PageState.SelectionDisk;
+                    if (_missionIsComplete)
+                    {
+                        _currentState = PageState.SelectionDisk;
+                    }
                     break;
                 case PageState.SelectionDisk:
-                    _currentState = PageState.DeselectToggles;
+                    if (_missionIsComplete)
+                    {
+                        _currentState = PageState.DeselectToggles;
+                        _missionIsComplete = false;
+                    }
                     break;
                 case PageState.DeselectToggles:
-                    _currentState = PageState.Installation;
+                    _missionIsComplete = _missionLogicViewModel.DeselectTogglesLogic(_deselectTogglesViewModel.GetToggles());
+                    if (_missionIsComplete)
+                    {
+                        _currentState = PageState.Installation;
+                    }
                     break;
                 default:
                     Debug.LogError(

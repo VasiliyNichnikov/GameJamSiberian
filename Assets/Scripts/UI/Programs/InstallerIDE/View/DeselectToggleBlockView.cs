@@ -18,12 +18,12 @@ namespace UI.Programs.InstallerIDE.View
             _viewModel = viewModel;
             _description.text = _viewModel.Description;
             _viewModel.OnChangeToggle.ObserveEveryValueChanged(x => x.Value).Subscribe(ChangeValue);
+            _toggle.onValueChanged.AddListener(OnToggleClicked);
         }
-
         /// <summary>
         /// Called from unity
         /// </summary>
-        public void OnToggleClicked() => _viewModel.OnToggleClickHandler();
+        public void OnToggleClicked(bool isOn) => _viewModel.OnToggleClickHandler();
         
         private void ChangeValue(bool value) => _toggle.isOn = value;
     }

@@ -22,5 +22,10 @@ namespace UI.Programs.InstallerIDE.ViewModel
                 _toggles.Add(new DeselectToggleViewModel(item.Description));
             }
         }
+
+        public List<DeselectToggleViewModel> GetToggles()
+        {
+            return _toggles;
+        }
     }
 }

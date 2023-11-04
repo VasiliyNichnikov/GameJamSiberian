@@ -21,5 +21,10 @@ namespace UI.Programs.InstallerIDE.ViewModel
         {
             _onChangeToggle.Value = !_onChangeToggle.Value;
         }
+
+        public bool GetValue()
+        {
+            return _onChangeToggle.Value;
+        }
     }
 }
