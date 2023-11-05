@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9fc060aa114ccfb6127f50a573bd6f, type: 3}
+  m_Name: QteMiniGameData
+  m_EditorClassIdentifier: 
+  _needKeys: 7100000077000000650000003001000020000000
+  _timeBetweenQte: 1
+  _qteTime: 2
+  _programText: "using System.Collections.Generic;\r\nusing System.Collections.ObjectModel;\r\nusing
+    System.Linq;\r\nusing Configs;\r\nusing UniRx;\r\n\r\nnamespace UI.Programs.TrelloMiniGame.ViewModel\r\n{\r\n   
+    public class TrelloColumnViewModel : ITrelloColumnViewModel\r\n    {\r\n       
+    public string TitleColumn { get; }\r\n        public IReactiveProperty<ReadOnlyCollection<ITrelloTaskViewModel>>
+    Tasks => _tasksProp;\r\n\r\n        private readonly ReactiveProperty<ReadOnlyCollection<ITrelloTaskViewModel>>
+    _tasksProp = new ();\r\n        private readonly List<TrelloTaskViewModel> _tasks;\r\n       
+    private readonly int _columnNumber;\r\n\r\n        public TrelloColumnViewModel(TrelloMiniGameData.ColumnData
+    data, TrelloMiniGameViewModel miniGameViewModel, int columnNumber)\r\n       
+    {\r\n            _tasks = data.Tasks.Select(taskData => new TrelloTaskViewModel(taskData,
+    miniGameViewModel.OnClickTaskHandler, miniGameViewModel.OnChangeTaskColumn, columnNumber)).ToList();\r\n           
+    _tasksProp.Value = _tasks.Cast<ITrelloTaskViewModel>().ToList().AsReadOnly();\r\n           
+    _columnNumber = columnNumber;\r\n        }\r\n\r\n        public bool TryRemoveTask(TrelloTaskViewModel
+    taskViewModel)\r\n        {\r\n            if(!_tasks.Contains(taskViewModel))\r\n           
+    {\r\n                return false;\r\n            }\r\n\r\n            _tasks.Remove(taskViewModel);\r\n           
+    _tasksProp.Value =_tasks.Cast<ITrelloTaskViewModel>().ToList().AsReadOnly();\r\n           
+    return true;\r\n        }\r\n\r\n        public bool TryAddTask(TrelloTaskViewModel
+    taskViewModel)\r\n        {\r\n            if(_tasks.Contains(taskViewModel))\r\n           
+    {\r\n                return false;\r\n            }\r\n\r\n            _tasks.Add(taskViewModel);\r\n           
+    taskViewModel.SetColumnNumber(_columnNumber);\r\n            _tasksProp.Value
+    =_tasks.Cast<ITrelloTaskViewModel>().ToList().AsReadOnly();\r\n            return
+    true;\r\n        }\r\n    }\r\n}"
+  _delay: 0.1
+  _numberSymbolsForDeleteInIteration: 10

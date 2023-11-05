@@ -5,6 +5,7 @@ using UI.Bluer;
 using UI.Desktop.View;
 using UI.Programs.InstallerIDE.View;
 using UI.Programs.Messenger.View;
+using UI.Programs.QTEMiniGame.View;
 using UI.Programs.TrelloMiniGame.View;
 using UI.Programs.PDF.View;
 using UnityEngine;
@@ -22,7 +23,8 @@ namespace UI
             { typeof(InstallerIDEDialog), "Prefabs/UI/InstallerIDE/InstallerIdeDialog" },
             { typeof(PDFDialog), "Prefabs/UI/PDF/PDFDialog" },
             { typeof(BluerDialog), "Prefabs/UI/BluerDialog" },
-            { typeof(WarningDialog), "Prefabs/UI/WarningDialog" }
+            { typeof(WarningDialog), "Prefabs/UI/WarningDialog" },
+            { typeof(QteMiniGameView), "Prefabs/UI/QteMiniGame/QTEMiniGameDialog" }
         };
 
         public T CreateDialog<T>(Transform parentDialog) where T : BaseDialog

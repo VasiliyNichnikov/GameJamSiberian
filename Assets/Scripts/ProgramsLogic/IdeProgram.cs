@@ -1,5 +1,7 @@
 ﻿using Configs;
 using UI.Desktop;
+using UI.Programs.QTEMiniGame.View;
+using UI.Programs.QTEMiniGame.VIewModel;
 
 namespace ProgramsLogic
 {
@@ -13,6 +15,10 @@ namespace ProgramsLogic
         
         protected override void OnClickHandlerBase()
         {
+            var dialog = Main.Instance.GuiManager.ShowDialog<QteMiniGameView>();
+            dialog.Init(new QteMiniGameViewModel());
+            dialog.SetHideAction(State.Close);
+            State.Open();
         }
     }
 }
