@@ -22,7 +22,7 @@ namespace ProgramsLogic
             _manager = new MessengerManager();
         }
 
-        public override void OnClickHandler()
+        protected override void OnClickHandlerBase()
         {
             if (State.IsOpened)
             {

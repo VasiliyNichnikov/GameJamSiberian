@@ -13,5 +13,9 @@ namespace ProgramsLogic
         public EmptyProgram(DesktopProgramContext context) : base(context)
         {
         }
+
+        protected override void OnClickHandlerBase()
+        {
+        }
     }
 }

@@ -1,30 +1,32 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using UniRx;
 using UnityEngine;
 
 namespace UI.Programs.TrelloMiniGame.ViewModel
 {
     public class TrelloMiniGameViewModel : ITrelloMiniGameViewModel
     {
+        public IReactiveProperty<bool> IsCompleted => _isCompleted;
         public ReadOnlyCollection<ITrelloColumnViewModel> Columns => _columns.Cast<ITrelloColumnViewModel>().ToList().AsReadOnly();
 
-        private TrelloTaskViewModel? _selectedTask = null!;
+        private readonly ReactiveProperty<bool> _isCompleted = new ReactiveProperty<bool>();
         private readonly List<TrelloColumnViewModel> _columns = new();
-        public TrelloMiniGameViewModel()
+        private readonly Action _onHideDialog;
+        
+        public TrelloMiniGameViewModel(Action hideDialog, bool isCompleted)
         {
             var data = DataHelper.Instance.TrelloMiniGameData;
             _columns.Add(new TrelloColumnViewModel(data.FirstColumnData, this, 0));
             _columns.Add(new TrelloColumnViewModel(data.SecondColumnData, this, 1));
             _columns.Add(new TrelloColumnViewModel(data.ThirdColumnData, this, 2));
             _columns.Add(new TrelloColumnViewModel(data.FourthColumnData, this, 3));
-        }
 
-        public void OnClickTaskHandler(TrelloTaskViewModel taskViewModel)
-        {
-            _selectedTask = taskViewModel;
-            _selectedTask.SelectAndShowArrows();
+            _isCompleted.Value = isCompleted;
+            _onHideDialog = hideDialog;
         }
 
         public void OnChangeTaskColumn(int currentColumnIndex, int nextColumnIndex, TrelloTaskViewModel taskViewModel)
@@ -49,6 +51,19 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
             {
                 Debug.LogError(
                     $"TrelloMiniGameViewModel.OnChangeTaskColumn: Couldn't add to column {nextColumnIndex}");
+            }
+        }
+        
+        public void OnClickSaveDataHandler()
+        {
+            if (_columns.All(column => column.IsLocationTasksCorrected))
+            {
+                _onHideDialog.Invoke();
+            }
+            else
+            {
+                // TODO в доработках
+                Debug.LogWarning("TrelloMiniGameViewModel:OnClickSaveDataHandler: need show error");
             }
         }
     }

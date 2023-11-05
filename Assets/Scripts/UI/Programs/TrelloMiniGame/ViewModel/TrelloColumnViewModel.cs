@@ -9,6 +9,11 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
     public class TrelloColumnViewModel : ITrelloColumnViewModel
     {
         public string TitleColumn { get; }
+
+        /// <summary>
+        /// Корректно ли расположены все таски в колонке
+        /// </summary>
+        public bool IsLocationTasksCorrected => _tasks.All(task => task.IsLocationCorrected);
         public IReactiveProperty<ReadOnlyCollection<ITrelloTaskViewModel>> Tasks => _tasksProp;
 
         private readonly ReactiveProperty<ReadOnlyCollection<ITrelloTaskViewModel>> _tasksProp = new ();
@@ -17,7 +22,8 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
 
         public TrelloColumnViewModel(TrelloMiniGameData.ColumnData data, TrelloMiniGameViewModel miniGameViewModel, int columnNumber)
         {
-            _tasks = data.Tasks.Select(taskData => new TrelloTaskViewModel(taskData, miniGameViewModel.OnClickTaskHandler, miniGameViewModel.OnChangeTaskColumn, columnNumber)).ToList();
+            TitleColumn = data.TitleText;
+            _tasks = data.Tasks.Select(taskData => new TrelloTaskViewModel(taskData, miniGameViewModel.OnChangeTaskColumn, columnNumber)).ToList();
             _tasksProp.Value = _tasks.Cast<ITrelloTaskViewModel>().ToList().AsReadOnly();
             _columnNumber = columnNumber;
         }

@@ -5,5 +5,6 @@ namespace Configs.Plot
     {
         EnteringPassword, // Первая игра в которой нужно ввести пароль и войти в чат
         InstallingIde,
+        Trello
     }
 }

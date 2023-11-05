@@ -9,14 +9,16 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
 {
     public class TrelloTaskViewModel : ITrelloTaskViewModel
     {
-        public event Action? OnShowArrows;
         public int ColumnNumber { get; private set; }
-        public string Title { get; }
-        public string Description { get; }
-        
+        public string Title => _data.Title;
+        public string Description => _data.Description;
         public string UserName { get; }
         public string UserSurname { get; }
         public Sprite UserIcon { get; }
+
+        // + 1 так как считаем с 1, поэтому правильный ответ на 1 больше
+        // выглядет увы как костыль, но пока как есть
+        public bool IsLocationCorrected => _data.RightNumberColumn == ColumnNumber + 1;
         
         public IReadOnlyCollection<string> Tags { get; }
 
@@ -26,16 +28,13 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
         /// Второй int - в какую колонку нужно перенести
         /// </summary>
         private readonly Action<int, int, TrelloTaskViewModel> _onClickArrowsHandler;
-        /// <summary>
-        /// Обработчик при нажатие на таску
-        /// </summary>
-        private readonly Action<TrelloTaskViewModel> _onClickTaskHandler;
+
+        private readonly TrelloMiniGameData.TaskData _data;
         
-        public TrelloTaskViewModel(TrelloMiniGameData.TaskData data, Action<TrelloTaskViewModel> onClickTaskHandler, Action<int, int, TrelloTaskViewModel> onClickArrowsHandler, int columnNumber)
+        public TrelloTaskViewModel(TrelloMiniGameData.TaskData data, Action<int, int, TrelloTaskViewModel> onClickArrowsHandler, int columnNumber)
         {
-            Title = data.Title;
+            _data = data;
             ColumnNumber = columnNumber;
-            Description = data.Description;
             Tags = data.Tags.Select(ConvertTag).ToList();
             var userData = DataHelper.Instance.TrelloMiniGameData.GetUserByType(data.User);
             UserName = userData.Name;
@@ -43,7 +42,6 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
             UserIcon = userData.Icon;
 
             _onClickArrowsHandler = onClickArrowsHandler;
-            _onClickTaskHandler = onClickTaskHandler;
         }
 
         /// <summary>
@@ -54,11 +52,8 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
             ColumnNumber = value;
         }
 
-        public void OnClickTaskHandler() => _onClickTaskHandler.Invoke(this);
-
         public void OnMoveLeftColumnHandler() => _onClickArrowsHandler.Invoke(ColumnNumber, ColumnNumber - 1, this);
         public void OnMoveRightColumnHandler() => _onClickArrowsHandler.Invoke(ColumnNumber, ColumnNumber + 1, this);
-        public void SelectAndShowArrows() => OnShowArrows?.Invoke();
         
         private static string ConvertTag(TrelloMiniGameData.TaskTag tag)
         {

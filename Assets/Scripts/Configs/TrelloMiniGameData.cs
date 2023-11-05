@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UI.Programs.Messenger;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Configs
 {
@@ -24,21 +26,25 @@ namespace Configs
             public string Title => _title;
             public string Description => _description;
             public UserType User => _user;
-            public int NumberColumn => _numberColumn;
+            public int RightNumberColumn => _rightNumberColumn;
             public ReadOnlyCollection<TaskTag> Tags => new ReadOnlyCollection<TaskTag>(_tags);
             
             [SerializeField] private string _title;
             [SerializeField, TextArea] private string _description;
             [SerializeField] private UserType _user;
             [SerializeField] private TaskTag[] _tags;
+            [FormerlySerializedAs("_numberColumn")]
             [Header("Answer: (Starting with 1)"), Range(1, 4)]
-            [SerializeField] private int _numberColumn;
+            [SerializeField] private int _rightNumberColumn;
         }
         
         [Serializable]
         public struct ColumnData
         {
+            public string TitleText => _titleText;
             public IReadOnlyCollection<TaskData> Tasks => _tasks;
+            
+            [SerializeField] private string _titleText;
             [SerializeField] private TaskData[] _tasks;
         }
 

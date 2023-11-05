@@ -5,25 +5,26 @@ using Pool;
 using UI.Programs.TrelloMiniGame.ViewModel;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Utils;
 
 namespace UI.Programs.TrelloMiniGame.View
 {
     public class TrelloColumnView : MonoBehaviour
     {
+        [SerializeField] private Text _title = null!;
         [SerializeField] private RectTransform _columnHolder = null!;
         [SerializeField] private TrelloTaskView _taskViewPrefab = null!;
-
-        private TrelloArrowsManager _trelloArrowsManager = null!;
+        
         private ITrelloColumnViewModel _viewModel = null!;
 
         private TrelloTasksPool _pool = null!;
         private readonly List<TrelloTaskView> _taskViews = new List<TrelloTaskView>();
 
-        public void Init(ITrelloColumnViewModel viewModel, TrelloArrowsManager trelloArrowsManager)
+        public void Init(ITrelloColumnViewModel viewModel)
         {
             _pool = new TrelloTasksPool(_columnHolder, _taskViewPrefab);
-            _trelloArrowsManager = trelloArrowsManager;
+            _title.text = viewModel.TitleColumn;
             _viewModel = viewModel;
             _viewModel.Tasks.ObserveEveryValueChanged(x => x.Value).Subscribe(CreateTasks);
         }
@@ -34,12 +35,11 @@ namespace UI.Programs.TrelloMiniGame.View
             foreach (var task in _taskViews.Where(view => view.isActiveAndEnabled))
             {
                 task.RemoveToPool();
-                task.Dispose();
             }
             foreach (var taskViewModel in tasks)
             {
                 var view = _pool.GetOrCreateTask();
-                view.Init(taskViewModel, _trelloArrowsManager);
+                view.Init(taskViewModel);
                 _taskViews.Add(view);
             }
         }
@@ -51,13 +51,6 @@ namespace UI.Programs.TrelloMiniGame.View
 
         private void TryClearTasks()
         {
-            if (_taskViews.Count != 0)
-            {
-                foreach (var taskView in _taskViews)
-                {
-                    taskView.Dispose();
-                }
-            }
             _taskViews.Clear();
             _columnHolder.DestroyChildren();
         }

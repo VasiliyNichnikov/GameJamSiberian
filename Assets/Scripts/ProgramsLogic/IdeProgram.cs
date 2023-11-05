@@ -10,5 +10,9 @@ namespace ProgramsLogic
         public IdeProgram(DesktopProgramContext context) : base(context)
         {
         }
+        
+        protected override void OnClickHandlerBase()
+        {
+        }
     }
 }

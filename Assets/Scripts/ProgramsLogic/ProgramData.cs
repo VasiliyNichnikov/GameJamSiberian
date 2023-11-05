@@ -1,7 +1,5 @@
 ﻿#nullable enable
-
 using Configs;
-using UI.ClicksHandler;
 using UI.Desktop;
 using UnityEngine;
 
@@ -32,20 +30,22 @@ namespace ProgramsLogic
             _context = context;
         }
 
-        public virtual void OnClickHandler()
+        public void OnClickHandler()
         {
             if (State.IsOpened)
             {
                 return;
             }
 
-            // Клик по умолчанию (Если нужен кастомный, оверайдим метод)
-            var canOpen = ProgramClicksHelper.OnClickDefaultHandler(Type, _context);
-            if (canOpen)
+            if (!_context.AllowProgramToRun)
             {
-                State.Open();
+                return;
             }
+            
+            OnClickHandlerBase();
         }
+
+        protected abstract void OnClickHandlerBase();
 
         public void Dispose()
         {

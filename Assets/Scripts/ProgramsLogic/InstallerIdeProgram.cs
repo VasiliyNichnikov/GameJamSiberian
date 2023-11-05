@@ -18,13 +18,8 @@ namespace ProgramsLogic
         {
         }
 
-        public override void OnClickHandler()
+        protected override void OnClickHandlerBase()
         {
-            if (State.IsOpened)
-            {
-                return;
-            }
-            
             var dialog = Main.Instance.GuiManager.ShowDialog<InstallerIDEDialog>();
             dialog.Init(new InstallerIDEViewModel(dialog.Hide));
             dialog.SetHideAction(() =>

@@ -25,6 +25,9 @@ namespace Plot
                 case MiniGameType.InstallingIde:
                     _miniGamePlot = new InstallingIdeMiniGamePlot(computerFacade);
                     break;
+                case MiniGameType.Trello:
+                    _miniGamePlot = new TrelloMiniGamePlot(computerFacade);
+                    break;
                 default:
                     Debug.LogError($"MiniGamePlotComponent: not supported type: {_miniGamePlot}");
                     _miniGamePlot = new EmptyMiniGame();
