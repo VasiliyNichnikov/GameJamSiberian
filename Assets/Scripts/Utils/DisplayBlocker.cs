@@ -12,7 +12,7 @@ namespace Utils
     {
         [SerializeField] private CanvasGroup _group = null!;
 
-        public void OffClicks() => _group.interactable = false;
-        public void OnClicks() => _group.interactable = true;
+        public void OffClicks() => _group.blocksRaycasts = false;
+        public void OnClicks() => _group.blocksRaycasts = true;
     }
 }

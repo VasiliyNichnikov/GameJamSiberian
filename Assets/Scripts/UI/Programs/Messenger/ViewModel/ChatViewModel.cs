@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace UI.Programs.Messenger.ViewModel
 {
     public class ChatViewModel : IChatViewModel
     {
+        public event Action? UploadedMessagesToSend;
         public IReactiveProperty<MessengerData.UserData?> SelectedUser => _userData;
         public IReactiveProperty<ReadOnlyCollection<SentMessage>> SentMessages => _sentMessages;
 
@@ -31,6 +33,10 @@ namespace UI.Programs.Messenger.ViewModel
             _chatManager = chat;
             _sentMessages.Value = chat.SentMessages.ToList().AsReadOnly();
             _userData.Value = chat.UserData;
+            if (!_chatManager.AllMessagesSendInChat)
+            {
+                UploadedMessagesToSend?.Invoke();
+            }
         }
         
         public IEnumerable<UnsentMessage> ReceiveUnsentMessages()

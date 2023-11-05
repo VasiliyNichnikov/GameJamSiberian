@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Configs;
@@ -8,6 +9,8 @@ namespace UI.Programs.Messenger.ViewModel
 {
     public interface IChatViewModel : IDisposable
     {
+        event Action? UploadedMessagesToSend;
+        
         /// <summary>
         /// Пользователь с которым будет идти диалог
         /// </summary>

@@ -36,6 +36,10 @@ namespace Plot
 
         public override bool CheckCompletionCondition() => _miniGamePlot.CheckCompletionCondition();
 
-        public override void CompletePlot() => _miniGamePlot.CompletePlot();
+        public override void CompletePlot()
+        {
+            _miniGamePlot.CompletePlot();
+            OnCompletePlot?.Invoke();
+        }
     }
 }

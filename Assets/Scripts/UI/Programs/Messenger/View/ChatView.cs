@@ -27,6 +27,10 @@ namespace UI.Programs.Messenger.View
             _viewModel = viewModel;
             _viewModel.SentMessages.ObserveEveryValueChanged(x => x.Value).Subscribe(CreateSentMessages);
             _viewModel.SelectedUser.ObserveEveryValueChanged(x => x.Value).Subscribe(UpdateUserData);
+
+            _viewModel.UploadedMessagesToSend += StartAnimationSendingMessageToChat;
+            
+            StartAnimationSendingMessageToChat();
         }
 
         private void UpdateUserData(MessengerData.UserData? data)
@@ -39,15 +43,6 @@ namespace UI.Programs.Messenger.View
             }
             
             _chatUserView.SetUserData(data.Value.Name);
-            // Так же попытаемся запустить анимацию
-            if (_animationOfWriting != null)
-            {
-                Debug.LogError("ChatView.UpdateUserData: animation is running");
-                return;
-            }
-
-            _animationOfWriting = AnimationSendingMessageToChat(_viewModel.ReceiveUnsentMessages());
-            StartCoroutine(_animationOfWriting);
         }
         
         private void CreateSentMessages(IReadOnlyCollection<SentMessage>? messages)
@@ -65,6 +60,18 @@ namespace UI.Programs.Messenger.View
             }
         }
 
+        private void StartAnimationSendingMessageToChat()
+        {
+            if (_animationOfWriting != null)
+            {
+                Debug.LogError("ChatView.UpdateUserData: animation is running");
+                return;
+            }
+
+            _animationOfWriting = AnimationSendingMessageToChat(_viewModel.ReceiveUnsentMessages());
+            StartCoroutine(_animationOfWriting);
+        }
+
         private IEnumerator AnimationSendingMessageToChat(IEnumerable<UnsentMessage> unsentMessages)
         {
             foreach (var unsentMessage in unsentMessages)
@@ -78,6 +85,7 @@ namespace UI.Programs.Messenger.View
 
         public void Dispose()
         {
+            _viewModel.UploadedMessagesToSend -= StartAnimationSendingMessageToChat;
             _viewModel.Dispose();
         }
     }
