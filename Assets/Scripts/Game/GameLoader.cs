@@ -1,4 +1,7 @@
 ﻿#nullable enable
+using Configs;
+using ProgramsLogic;
+using UI.Desktop;
 
 namespace Game
 {
