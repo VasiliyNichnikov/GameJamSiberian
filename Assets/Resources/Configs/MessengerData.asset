@@ -22,6 +22,14 @@ MonoBehaviour:
     - _messageSendingData: {fileID: 11400000, guid: 4e1d51d7fa7555048bdef6f6fcb37f93, type: 2}
       _messageResponseData: {fileID: 0}
   _users:
-  - _userName: "\u041D\u0430\u0447\u0430\u043B\u044C\u043D\u0438\u043A"
-    _userIcon: {fileID: 21300000, guid: 1129e8d317cbf6a4995c2fb1559a2d09, type: 3}
+  - _userName: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435"
+    _userSurname: 
+    _userIcon: {fileID: 21300000, guid: 00c4638f72afdb646802679eb063f453, type: 3}
     _userType: 0
+  - _userName: "\u041D\u0430\u0447\u0430\u043B\u044C\u043D\u0438\u043A"
+    _userSurname: 
+    _userIcon: {fileID: 21300000, guid: 1129e8d317cbf6a4995c2fb1559a2d09, type: 3}
+    _userType: 1
+  _loginData:
+    _rightLogin: login
+    _rightPassword: password

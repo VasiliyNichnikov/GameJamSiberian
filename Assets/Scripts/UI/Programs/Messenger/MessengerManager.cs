@@ -18,18 +18,24 @@ namespace UI.Programs.Messenger
         /// <summary>
         /// Срабатывает при выборе чата и отдает в него уже отправленные сообщения
         /// </summary>
-        public event Action<IReadOnlyCollection<SentMessage>>? OnChatSelected;
-        
+        public event Action<ChatManager>? OnChatSelected;
+
         private readonly Dictionary<UserType, ChatManager> _chats = new Dictionary<UserType, ChatManager>();
-        
+
         public IReadOnlyCollection<UserType> AllUserTypes => Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
 
         public MessengerManager() => InitializeChats();
 
         public void SelectUserChat(UserType type)
         {
-            _chats[type].ConvertAllMessagesDebug();
-            OnChatSelected?.Invoke(GetAllSentChatMessages(type));
+            if (!_chats.ContainsKey(type))
+            {
+                Debug.LogError($"MessengerManager.SelectUserChat: not found chat with user {type}");
+                return;
+            }
+
+            var chat = _chats[type];
+            OnChatSelected?.Invoke(chat);
         }
 
         public void OpenMessenger()
@@ -49,7 +55,7 @@ namespace UI.Programs.Messenger
             var chats = DataHelper.Instance.MessengerData.Chats;
             foreach (var chatData in chats)
             {
-                var chat = new ChatManager();
+                var chat = new ChatManager(chatData.UserType);
                 foreach (var messageData in chatData.Messages)
                 {
                     if (messageData.MessageSendingData != null)
@@ -65,6 +71,7 @@ namespace UI.Programs.Messenger
                         Debug.LogError("MessengerFacade: all data is null");
                     }
                 }
+
                 _chats[chatData.UserType] = chat;
             }
         }

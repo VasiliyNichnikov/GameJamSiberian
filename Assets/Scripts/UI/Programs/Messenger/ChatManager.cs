@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using Configs;
+using UnityEngine;
 
 namespace UI.Programs.Messenger
 {
@@ -8,6 +9,8 @@ namespace UI.Programs.Messenger
     {
         public IReadOnlyCollection<SentMessage> SentMessages => _sentMessages;
 
+        public MessengerData.UserData UserData => _sendingUserData;
+        
         /// <summary>
         /// Отправленные сообщения
         /// </summary>
@@ -20,9 +23,16 @@ namespace UI.Programs.Messenger
         /// </summary>
         private readonly Queue<UnsentMessage> _unprocessedMessages = new();
 
+        private readonly MessengerData.UserData _sendingUserData;
+        
+        public ChatManager(UserType sendingUserType)
+        {
+            _sendingUserData = DataHelper.Instance.MessengerData.GetUserDataByType(sendingUserType);
+        }
+        
         public void AddMessage(MessageSendingData sendingData)
         {
-            _unprocessedMessages.Enqueue(new ResponseMessage(sendingData.Text, sendingData.TimeOfWriting));
+            _unprocessedMessages.Enqueue(new ResponseMessage(sendingData.Text, _sendingUserData.Icon, _sendingUserData.Type, sendingData.TimeOfWriting));
         }
 
         public void AddMessage(MessageResponseData responseData)

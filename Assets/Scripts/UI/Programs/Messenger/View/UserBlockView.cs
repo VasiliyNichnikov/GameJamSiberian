@@ -1,6 +1,8 @@
 ﻿#nullable enable
 using UI.Programs.Messenger.ViewModel;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.Programs.Messenger.View
@@ -9,7 +11,8 @@ namespace UI.Programs.Messenger.View
     {
         [SerializeField] private Text _nameUser = null!;
         [SerializeField] private Image _iconUser = null!;
-
+        [SerializeField] private GameObject _selectableImage = null!;
+        
         private IUserBlockViewModel _viewModel = null!;
         
         public void Init(IUserBlockViewModel viewModel)
@@ -17,6 +20,11 @@ namespace UI.Programs.Messenger.View
             _viewModel = viewModel;
             _iconUser.sprite = viewModel.Icon;
             _nameUser.text = viewModel.NameUser;
+
+            _viewModel.IsSelected.ObserveEveryValueChanged(x => x.Value).Subscribe(isSelected =>
+            {
+                _selectableImage.SetActive(isSelected);
+            });
         }
 
         /// <summary>

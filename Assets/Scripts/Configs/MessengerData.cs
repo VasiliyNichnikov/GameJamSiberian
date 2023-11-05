@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UI.Programs.Messenger;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Configs
 {
@@ -11,6 +12,7 @@ namespace Configs
     public class MessengerData : ScriptableObject
     {
         public IReadOnlyCollection<ChatData> Chats => _chats;
+        public LoginData GetLoginData() => _loginData;
         
         [Serializable]
         public struct UserData
@@ -45,9 +47,20 @@ namespace Configs
             [SerializeField, Header("С каким пользователем игрок общается")] private UserType _userType;
             [SerializeField] private MessageData[] _messages;
         }
+        
+        [Serializable]
+        public struct LoginData
+        {
+            public string RightLogin => _rightLogin;
+            public string RightPassword => _rightPassword;
+
+            [SerializeField, Header("Правильный логин (Учитывайте регистр и тп)")] private string _rightLogin;
+            [SerializeField, Header("Правильный пароль (Учитывайте регистр и тп)")] private string _rightPassword;
+        }
 
         [SerializeField] private ChatData[] _chats = null!;
         [SerializeField] private UserData[] _users = null!;
+        [SerializeField] private LoginData _loginData;
 
         public UserData GetUserDataByType(UserType type)
         {
