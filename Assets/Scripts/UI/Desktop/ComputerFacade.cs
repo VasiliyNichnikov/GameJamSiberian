@@ -1,25 +1,38 @@
 ﻿#nullable enable
 
 using System;
+using Configs;
+using ProgramsLogic;
 using UI.Desktop.View;
 using UI.Desktop.ViewModel;
+using UI.Programs;
+using UI.Programs.Messenger;
 
 namespace UI.Desktop
 {
     public class ComputerFacade : IComputerFacade, IDisposable
     {
-        private readonly ProgramStorage _storage = new ProgramStorage();
+        public IMessengerManager MessengerManager => _messengerManager;
         
+        /// <summary>
+        /// Чат должен жить на протяжение все игры
+        /// </summary>
+        private readonly MessengerManager _messengerManager = new MessengerManager();
+        private readonly ProgramStorage _storage = new ProgramStorage();
+
         /// <summary>
         /// Установка программы
         /// </summary>
-        public void InstallProgram(DesktopProgramContext context) => _storage.InstallProgram(context);
+        public void InstallProgram(ProgramData program) => _storage.InstallProgram(program);
         /// <summary>
         /// Обновляем программму
         /// </summary>
-        public void UpdateProgram(DesktopProgramContext context) => _storage.UpdateProgram(context);
+        public void UpdateProgram(ProgramType programType, DesktopProgramContext context) => _storage.UpdateProgram(programType, context);
 
-        public void RemoveProgram(DesktopProgramContext context) => _storage.RemoveProgram(context);
+        /// <summary>
+        /// Удаляем программу
+        /// </summary>
+        public void RemoveProgram(ProgramData program) => _storage.RemoveProgram(program.Type);
 
         public void OpenDesktop()
         {

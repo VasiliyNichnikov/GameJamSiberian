@@ -4,6 +4,7 @@
     {
         IzbaSurf,
         Swallow,
-        IDE
+        IDE,
+        Empty
     }
 }

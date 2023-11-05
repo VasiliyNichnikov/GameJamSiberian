@@ -8,10 +8,10 @@
         private readonly LeftPanelViewModel _leftPanelViewModel;
         private readonly ChatViewModel _chatViewModel;
         
-        public MessengerViewModel(MessengerFacade facade)
+        public MessengerViewModel(MessengerManager manager)
         {
-            _leftPanelViewModel = new LeftPanelViewModel(facade);
-            _chatViewModel = new ChatViewModel(facade);
+            _leftPanelViewModel = new LeftPanelViewModel(manager);
+            _chatViewModel = new ChatViewModel(manager);
         }
 
         public void Dispose()

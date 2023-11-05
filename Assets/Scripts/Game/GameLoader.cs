@@ -1,8 +1,10 @@
 ﻿#nullable enable
 using Configs;
+using ProgramsLogic;
 using UI.Desktop;
 using UI.Desktop.View;
 using UI.Desktop.ViewModel;
+using UI.Programs.Messenger;
 
 namespace Game
 {
@@ -28,9 +30,9 @@ namespace Game
             // Открываем рабочий стол
             _computerFacade.OpenDesktop();
             // Устанавливаем браузер без возможности в него попасть
-            _computerFacade.InstallProgram(DesktopProgramContext.Default(ProgramType.IzbaSurf));
+            _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.IzbaSurf, DesktopProgramContext.Default()));
             // Устанавливаем мессенджер с возможностью в него попасть
-            _computerFacade.InstallProgram(DesktopProgramContext.Default(ProgramType.Swallow).SetAllowProgramToRun());
+            _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.Swallow, DesktopProgramContext.Default().SetAllowProgramToRun()));
         }
     }
 }

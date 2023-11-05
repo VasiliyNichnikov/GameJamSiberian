@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using ProgramsLogic;
 using UI.Desktop.ViewModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,14 +13,14 @@ namespace UI.Desktop.View
         [SerializeField] private Text _name = null!;
         [SerializeField] private GameObject _selectionIcon = null!;
 
-        private IProgramIconViewModel _viewModel = null!;
+        private IProgram _program = null!;
         
-        public void Init(IProgramIconViewModel viewModel)
+        public void Init(IProgram program)
         {
-            _viewModel = viewModel;
+            _program = program;
 
-            _name.text = _viewModel.Name;
-            _icon.sprite = _viewModel.Icon;
+            _name.text = _program.Name;
+            _icon.sprite = _program.Icon;
         }
 
         /// <summary>
@@ -27,7 +28,7 @@ namespace UI.Desktop.View
         /// </summary>
         public void OnClickButton()
         {
-            _viewModel.OnClickHandler();
+            _program.OnClickHandler();
         }
 
         public void OnPointerEnter(PointerEventData eventData) => _selectionIcon.SetActive(true);

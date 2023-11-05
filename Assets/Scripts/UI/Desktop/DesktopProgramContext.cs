@@ -8,9 +8,8 @@ namespace UI.Desktop
     public struct DesktopProgramContext
     {
         public bool AllowProgramToRun { get; private set; }
-        public ProgramType ProgramType { get; private set; }
 
-        public static DesktopProgramContext Default(ProgramType type) => new DesktopProgramContext(type);
+        public static DesktopProgramContext Default() => new DesktopProgramContext();
         
         public DesktopProgramContext SetAllowProgramToRun()
         {
@@ -20,7 +19,6 @@ namespace UI.Desktop
         
         private DesktopProgramContext(ProgramType type)
         {
-            ProgramType = type;
             AllowProgramToRun = false;
         }
     }

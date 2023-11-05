@@ -8,16 +8,16 @@ namespace UI.Programs.Messenger.ViewModel
         public IReactiveProperty<IReadOnlyCollection<SentMessage>> SentMessages => _sentMessages;
 
         private readonly ReactiveProperty<IReadOnlyCollection<SentMessage>> _sentMessages = new();
-        private readonly MessengerFacade _facade;
+        private readonly MessengerManager _manager;
 
-        public ChatViewModel(MessengerFacade facade)
+        public ChatViewModel(MessengerManager manager)
         {
-            _facade = facade;
-            _facade.OnChatSelected += UpdateMessages;
+            _manager = manager;
+            _manager.OnChatSelected += UpdateMessages;
         }
 
         private void UpdateMessages(IReadOnlyCollection<SentMessage> messages) => _sentMessages.Value = messages;
 
-        public void Dispose() => _facade.OnChatSelected -= UpdateMessages;
+        public void Dispose() => _manager.OnChatSelected -= UpdateMessages;
     }
 }

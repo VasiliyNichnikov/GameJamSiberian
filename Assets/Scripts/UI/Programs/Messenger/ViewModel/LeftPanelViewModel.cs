@@ -8,14 +8,14 @@ namespace UI.Programs.Messenger.ViewModel
     {
         public IReadOnlyCollection<IUserBlockViewModel> UsersViewModel { get; }
 
-        private readonly MessengerFacade _facade;
+        private readonly MessengerManager _manager;
 
-        public LeftPanelViewModel(MessengerFacade facade)
+        public LeftPanelViewModel(MessengerManager manager)
         {
-            _facade = facade;
-            UsersViewModel = _facade.AllUserTypes.Select(type => new UserBlockViewModel(type, () => OnClickUser(type))).ToList();
+            _manager = manager;
+            UsersViewModel = _manager.AllUserTypes.Select(type => new UserBlockViewModel(type, () => OnClickUser(type))).ToList();
         }
         
-        private void OnClickUser(UserType type) => _facade.SelectUserChat(type);
+        private void OnClickUser(UserType type) => _manager.SelectUserChat(type);
     }
 }

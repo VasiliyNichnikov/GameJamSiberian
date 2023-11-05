@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UI.Programs.Messenger.View;
+using UI.Programs.Messenger.ViewModel;
 using UnityEngine;
 
 namespace UI.Programs.Messenger
 {
-    public class MessengerFacade : IMessengerFacade
+    public class MessengerManager : IMessengerManager
     {
         /// <summary>
         /// Срабатывает при добавление нового сообщения в чат
@@ -22,14 +24,21 @@ namespace UI.Programs.Messenger
         
         public IReadOnlyCollection<UserType> AllUserTypes => Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
 
-        public MessengerFacade() => InitializeChats();
+        public MessengerManager() => InitializeChats();
 
         public void SelectUserChat(UserType type)
         {
             _chats[type].ConvertAllMessagesDebug();
             OnChatSelected?.Invoke(GetAllSentChatMessages(type));
         }
-        
+
+        public void OpenMessenger()
+        {
+            var viewModel = new MessengerViewModel(this);
+            var dialog = Main.Instance.GuiManager.ShowDialog<MessengerDialog>();
+            dialog.Init(viewModel);
+        }
+
         /// <summary>
         /// Получаем все сообщения которые уже были отправлены в чате
         /// </summary>

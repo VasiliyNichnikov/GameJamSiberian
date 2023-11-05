@@ -4,10 +4,9 @@ using UI.Programs.Messenger;
 namespace UI.Programs
 {
     /// <summary>
-    /// Перегородка между данными и логикой
-    /// Чтобы не надо было постоянно обращаться к синглтону в ВМ
+    /// Команды для работы с мессенджером
     /// </summary>
-    public interface IMessengerFacade
+    public interface IMessengerManager
     {
         /// <summary>
         /// Получаем всех доступных пользователей
@@ -19,5 +18,10 @@ namespace UI.Programs
         /// Выбор пользователя для показа чата
         /// </summary>
         void SelectUserChat(UserType type);
+
+        /// <summary>
+        /// Открываем чат
+        /// </summary>
+        void OpenMessenger();
     }
 }

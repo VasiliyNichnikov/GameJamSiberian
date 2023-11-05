@@ -1,7 +1,9 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Configs;
+using ProgramsLogic;
 using UnityEngine;
 
 namespace UI.Desktop
@@ -23,53 +25,43 @@ namespace UI.Desktop
         
         private readonly Dictionary<ProgramType, ProgramData> _installedPrograms = new();
 
-        public void InstallProgram(DesktopProgramContext context)
+        public void InstallProgram(ProgramData program)
         {
-            if (_installedPrograms.ContainsKey(context.ProgramType))
+            if (_installedPrograms.ContainsKey(program.Type))
             {
                 Debug.LogError($"ProgramStorage.InstallProgram: the program is already installed");
                 return;
             }
 
-            _installedPrograms[context.ProgramType] = new ProgramData(context);
-            OnInstalledProgram?.Invoke(context.ProgramType);
+            _installedPrograms[program.Type] = program;
+            OnInstalledProgram?.Invoke(program.Type);
         }
 
-        public void UpdateProgram(DesktopProgramContext context)
+        public void UpdateProgram(ProgramType programType, DesktopProgramContext context)
         {
-            if (!_installedPrograms.ContainsKey(context.ProgramType))
+            if (!_installedPrograms.ContainsKey(programType))
             {
                 Debug.LogError($"ProgramStorage.UpdateProgram: the program is not installed");
                 return;
             }
             
-            _installedPrograms[context.ProgramType].UpdateContext(context);
-            OnUpdatedProgram?.Invoke(context.ProgramType);
+            _installedPrograms[programType].UpdateContext(context);
+            OnUpdatedProgram?.Invoke(programType);
         }
         
-        public void RemoveProgram(DesktopProgramContext context)
+        public void RemoveProgram(ProgramType programType)
         {
-            if (!_installedPrograms.ContainsKey(context.ProgramType))
+            if (!_installedPrograms.ContainsKey(programType))
             {
                 Debug.LogError($"ProgramStorage.RemoveProgram: the program is not installed");
                 return;
             }
 
-            _installedPrograms[context.ProgramType].Dispose();
-            _installedPrograms.Remove(context.ProgramType);
-            OnRemovedProgram?.Invoke(context.ProgramType);
+            _installedPrograms[programType].Dispose();
+            _installedPrograms.Remove(programType);
+            OnRemovedProgram?.Invoke(programType);
         }
 
-        public bool TryGetLoadedProgram(ProgramType type, out ProgramData? program)
-        {
-            if (!_installedPrograms.TryGetValue(type, out var result))
-            {
-                program = null;
-                return false;
-            }
-
-            program = result;
-            return true;
-        }
+        public IReadOnlyCollection<IProgram> Programs => _installedPrograms.Select(kvp => kvp.Value).Cast<IProgram>().ToList();
     }
 }

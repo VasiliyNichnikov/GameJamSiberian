@@ -14,7 +14,6 @@ namespace UI
 
         public virtual void Show()
         {
-            transform.SetAsFirstSibling();
         }
 
         public virtual void Hide()

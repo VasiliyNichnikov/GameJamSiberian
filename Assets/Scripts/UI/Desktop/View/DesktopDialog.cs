@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using ProgramsLogic;
 using UI.Desktop.ViewModel;
 using UniRx;
 using UnityEngine;
@@ -20,17 +21,17 @@ namespace UI.Desktop.View
             _viewModel.Programs.ObserveEveryValueChanged(x => x.Value).Subscribe(CreateIcons);
         }
 
-        private void CreateIcons(IReadOnlyCollection<IProgramIconViewModel>? viewModels)
+        private void CreateIcons(IReadOnlyCollection<IProgram>? programs)
         {
-            if (viewModels == null)
+            if (programs == null)
             {
                 return;
             }
             
-            foreach (var viewModel in viewModels)
+            foreach (var program in programs)
             {
                 var view = Instantiate(_programIconPrefab, _iconsHolder, false);
-                view.Init(viewModel);
+                view.Init(program);
             }
         }
 
