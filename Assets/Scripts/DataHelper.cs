@@ -18,7 +18,8 @@ public class DataHelper: MonoBehaviour
     [SerializeField] private ProgramsIconData _programsIconData = null!;
     [SerializeField] private PlotData _plotData = null!;
     [SerializeField] private InstallerMiniGameData _installerMiniGameData = null!;
-    
+    [SerializeField] private PDFDataFiller _pdfDataFiller = null!;
+
     private void Awake()
     {
         Instance = this;
