@@ -63,5 +63,17 @@ namespace UI.Desktop
         }
 
         public IReadOnlyCollection<IProgram> Programs => _installedPrograms.Select(kvp => kvp.Value).Cast<IProgram>().ToList();
+
+        public bool TryGetProgram(ProgramType program, out IProgram? result)
+        {
+            if (!_installedPrograms.TryGetValue(program, out var programData))
+            {
+                result = null;
+                return false;
+            }
+
+            result = programData;
+            return true;
+        }
     }
 }

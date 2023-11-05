@@ -1,6 +1,6 @@
-﻿using Configs;
+﻿#nullable enable
+using Configs;
 using ProgramsLogic;
-using UI.Programs;
 
 namespace UI.Desktop
 {
@@ -9,10 +9,20 @@ namespace UI.Desktop
     /// </summary>
     public interface IComputerFacade
     {
-        IMessengerManager MessengerManager { get; }
-        
         void InstallProgram(ProgramData program);
         void UpdateProgram(ProgramType programType, DesktopProgramContext context);
         void RemoveProgram(ProgramData program);
+
+        bool TryGetInstalledProgram(ProgramType programType, out IProgram? program);
+
+        /// <summary>
+        /// Блокирует все наажатия на рабочем столе
+        /// </summary>
+        void BlockAllClicks();
+
+        /// <summary>
+        /// Разблокирует все нажатия на рабочем столе
+        /// </summary>
+        void UnlockAllClicks();
     }
 }

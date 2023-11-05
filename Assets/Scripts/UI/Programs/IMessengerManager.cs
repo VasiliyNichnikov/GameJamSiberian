@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using Configs.Plot;
 using UI.Programs.Messenger;
 
 namespace UI.Programs
@@ -8,12 +9,13 @@ namespace UI.Programs
     /// </summary>
     public interface IMessengerManager
     {
+        MessengerState State { get; }
+        
         /// <summary>
-        /// Получаем всех доступных пользователей
-        /// Которых можем читать
+        /// Используется для того чтобы убедиться что больше сообщений на отправку нет
         /// </summary>
-        IReadOnlyCollection<UserType> AllUserTypes { get; }
-
+        bool AllMessagesSendInChat(UserType user);
+        
         /// <summary>
         /// Выбор пользователя для показа чата
         /// </summary>
@@ -23,5 +25,10 @@ namespace UI.Programs
         /// Открываем чат
         /// </summary>
         void OpenMessenger();
+
+        /// <summary>
+        /// Загружаем сообщения в чаты
+        /// </summary>
+        void LoadMessagesInChats(MessengerPlotData data);
     }
 }

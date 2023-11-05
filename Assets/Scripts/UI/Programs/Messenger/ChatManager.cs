@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
 using Configs;
+using Configs.Plot;
 using UnityEngine;
 
 namespace UI.Programs.Messenger
@@ -9,8 +10,10 @@ namespace UI.Programs.Messenger
     {
         public IReadOnlyCollection<SentMessage> SentMessages => _sentMessages;
 
-        public MessengerData.UserData UserData => _sendingUserData;
-        
+        public MessengerData.UserData UserData { get; }
+
+        public bool AllMessagesSendInChat => _unsentMessages.Count == 0;
+
         /// <summary>
         /// Отправленные сообщения
         /// </summary>
@@ -21,50 +24,48 @@ namespace UI.Programs.Messenger
         /// Это может быть сообщение ожидающее отправки
         /// Так и сообщение которое должен отправить игрок на выбор
         /// </summary>
-        private readonly Queue<UnsentMessage> _unprocessedMessages = new();
+        private readonly Queue<UnsentMessage> _unsentMessages = new();
 
-        private readonly MessengerData.UserData _sendingUserData;
+        private readonly UserType _sendingUserType;
         
         public ChatManager(UserType sendingUserType)
         {
-            _sendingUserData = DataHelper.Instance.MessengerData.GetUserDataByType(sendingUserType);
-        }
-        
-        public void AddMessage(MessageSendingData sendingData)
-        {
-            _unprocessedMessages.Enqueue(new ResponseMessage(sendingData.Text, _sendingUserData.Icon, _sendingUserData.Type, sendingData.TimeOfWriting));
+            _sendingUserType = sendingUserType;
+            UserData = DataHelper.Instance.MessengerData.GetUserDataByType(sendingUserType);
         }
 
-        public void AddMessage(MessageResponseData responseData)
+        public void AddMessage(MessengerPlotData.MessageData messageData)
         {
-            _unprocessedMessages.Enqueue(new AnswerFromPlayerMessage(responseData.MessageSelection));
+            var fromMessage = messageData.IdUser == 1 ? _sendingUserType : UserType.Player;
+            _unsentMessages.Enqueue(new ResponseMessage(messageData.Text, UserData.Icon, fromMessage, messageData.TimeOfWriting));
         }
-
-#if UNITY_EDITOR
-        /// <summary>
-        /// Этот метод должен быть удален после введения общей логики движения игрока по сюжета
-        /// Пока для проверки
-        /// </summary>
-        public void ConvertAllMessagesDebug()
-        {
-            while (_unprocessedMessages.Count > 0)
-            {
-                var package = _unprocessedMessages.Dequeue();
-                _sentMessages.Add(package.ConvertToSentMessage());
-            }
-        }
-#endif
 
         public bool TryGetMessage(out UnsentMessage? message)
         {
-            if (_unprocessedMessages.Count == 0)
+            if (_unsentMessages.Count == 0)
             {
                 message = null;
                 return false;
             }
 
-            message = _unprocessedMessages.Dequeue();
+            message = _unsentMessages.Peek();
             return true;
+        }
+
+        /// <summary>
+        /// TODO
+        /// тут не помешают проверки на случай отсутсвия чего либо
+        /// </summary>
+        public void MarkFirstMessageAsSent()
+        {
+            var sentMessage = _unsentMessages.Dequeue().ConvertToSentMessage();
+            if (_sentMessages.Contains(sentMessage))
+            {
+                Debug.LogError("ChatManager.MarkMessageAsSent: sentMessage is already contains in list");
+                return;
+            }
+
+            _sentMessages.Add(sentMessage);
         }
     }
 }

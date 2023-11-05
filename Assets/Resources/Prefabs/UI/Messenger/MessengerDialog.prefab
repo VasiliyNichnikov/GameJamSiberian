@@ -1900,6 +1900,7 @@ MonoBehaviour:
   _contentHolder: {fileID: 1188140893048815990}
   _messageViewPrefab: {fileID: 3985834909248725461, guid: 2a785be672c8fc24db456ea1cca94fea, type: 3}
   _hintToChooseChatText: {fileID: 6097209847418308070}
+  _animationOfWritingMessageText: {fileID: 0}
 --- !u!1 &7041502399217601628
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,7 +2561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 7801017599727822029}
   m_Horizontal: 0
-  m_Vertical: 1
+  m_Vertical: 0
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1

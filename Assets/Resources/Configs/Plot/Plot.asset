@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c989885b5efb42bf9b5141fb532822a3, type: 3}
+  m_Name: Plot
+  m_EditorClassIdentifier: 
+  _plots:
+  - _plotType: 1
+    _miniGameData: {fileID: 11400000, guid: 4f5975db5e378b045ab0dbfde53e6ff6, type: 2}
+    _messengerData: {fileID: 0}
+    _blackScreenData: {fileID: 0}
+  - _plotType: 0
+    _miniGameData: {fileID: 0}
+    _messengerData: {fileID: 11400000, guid: 57224a3acdca59e4f941348ed371ce7a, type: 2}
+    _blackScreenData: {fileID: 0}

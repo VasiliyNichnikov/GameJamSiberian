@@ -5,16 +5,19 @@ using UI.Desktop;
 using UI.Desktop.View;
 using UI.Desktop.ViewModel;
 using UI.Programs.Messenger;
+using UnityEngine;
 
 namespace Game
 {
     public class GameLoader
     {
+        public IComputerFacade ComputerFacade => _computerFacade;
+        
         private readonly ComputerFacade _computerFacade;
 
-        public GameLoader()
+        public GameLoader(ClicksController clicksController)
         {
-            _computerFacade = new ComputerFacade();
+            _computerFacade = new ComputerFacade(clicksController);
         }
         
         public void LoadGame()

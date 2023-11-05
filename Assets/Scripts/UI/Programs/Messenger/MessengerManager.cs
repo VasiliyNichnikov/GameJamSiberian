@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Configs.Plot;
 using UI.Programs.Messenger.View;
 using UI.Programs.Messenger.ViewModel;
 using UnityEngine;
@@ -13,18 +14,23 @@ namespace UI.Programs.Messenger
         /// <summary>
         /// Срабатывает при добавление нового сообщения в чат
         /// </summary>
+#pragma warning disable CS0067
         public event Action<UserType, UnsentMessage>? OnNewMessageAdded;
+#pragma warning disable
+
+        public MessengerState State { get; private set; }
 
         /// <summary>
         /// Срабатывает при выборе чата и отдает в него уже отправленные сообщения
         /// </summary>
         public event Action<ChatManager>? OnChatSelected;
 
-        private readonly Dictionary<UserType, ChatManager> _chats = new Dictionary<UserType, ChatManager>();
+        private readonly Dictionary<UserType, ChatManager> _chats = new ();
 
-        public IReadOnlyCollection<UserType> AllUserTypes => Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+        public static IReadOnlyCollection<UserType> AllUserTypes => Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
 
         public MessengerManager() => InitializeChats();
+        
 
         public void SelectUserChat(UserType type)
         {
@@ -45,34 +51,49 @@ namespace UI.Programs.Messenger
             dialog.Init(viewModel);
         }
 
-        /// <summary>
-        /// Получаем все сообщения которые уже были отправлены в чате
-        /// </summary>
-        private IReadOnlyCollection<SentMessage> GetAllSentChatMessages(UserType type) => _chats[type].SentMessages;
+        public bool AllMessagesSendInChat(UserType user)
+        {
+            if (!_chats.ContainsKey(user))
+            {
+                Debug.LogError($"MessengerManager.AllMessagesSendInChat: not found chat with user {user}");
+                return false;
+            }
 
+            return _chats[user].AllMessagesSendInChat;
+        }
+        
+        public void LoadMessagesInChats(MessengerPlotData data)
+        {
+            if (!_chats.ContainsKey(data.UserType))
+            {
+                Debug.LogError($"MessengerManager.LoadMessagesInChats: chat with user {data.UserType} not found");
+                return;
+            }
+
+            var chat = _chats[data.UserType];
+            foreach (var messageData in data.Messages)
+            {
+                chat.AddMessage(messageData);
+            }
+        }
+
+        public void EndLogin()
+        {
+            if (State == MessengerState.Opened)
+            {
+                Debug.LogError("MessengerManager.EndLogin: manager is already opened");
+                return;
+            }
+
+            State = MessengerState.Opened;
+        }
+        
         private void InitializeChats()
         {
-            var chats = DataHelper.Instance.MessengerData.Chats;
-            foreach (var chatData in chats)
+            foreach (var userType in AllUserTypes)
             {
-                var chat = new ChatManager(chatData.UserType);
-                foreach (var messageData in chatData.Messages)
-                {
-                    if (messageData.MessageSendingData != null)
-                    {
-                        chat.AddMessage(messageData.MessageSendingData);
-                    }
-                    else if (messageData.MessageResponseData != null)
-                    {
-                        chat.AddMessage(messageData.MessageResponseData);
-                    }
-                    else
-                    {
-                        Debug.LogError("MessengerFacade: all data is null");
-                    }
-                }
-
-                _chats[chatData.UserType] = chat;
+                var chat = new ChatManager(userType);
+                _chats[userType] = chat;
             }
         }
     }

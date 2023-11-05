@@ -26,11 +26,15 @@ namespace UI.Programs.Messenger.ViewModel
         
         public MessengerViewModel(MessengerManager manager)
         {
-            _loginViewModel = new MessengerLoginViewModel(() => SetPage(PageState.Chat));
+            _loginViewModel = new MessengerLoginViewModel(() =>
+            {
+                SetPage(PageState.Chat);
+                manager.EndLogin();
+            });
             _leftPanelViewModel = new LeftPanelViewModel(manager);
             _chatViewModel = new ChatViewModel(manager);
 
-            SetPage(PageState.Login);
+            SetPage(manager.State == MessengerState.Blocked ? PageState.Login : PageState.Chat);
         }
 
         private void SetPage(PageState state)

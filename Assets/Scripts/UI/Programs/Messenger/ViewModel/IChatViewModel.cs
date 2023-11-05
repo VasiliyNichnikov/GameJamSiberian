@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Configs;
 using UniRx;
 
@@ -15,6 +16,13 @@ namespace UI.Programs.Messenger.ViewModel
         /// Сообщения которые были отправлены в чате
         /// Может быть пустым
         /// </summary>
-        IReactiveProperty<IReadOnlyCollection<SentMessage>> SentMessages { get; }
+        IReactiveProperty<ReadOnlyCollection<SentMessage>> SentMessages { get; }
+
+        IEnumerable<UnsentMessage> ReceiveUnsentMessages();
+
+        /// <summary>
+        /// Помечает первое сообщение (которое идет на отправку) как отправленное
+        /// </summary>
+        void MarkFirstMessageAsSent();
     }
 }

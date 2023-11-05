@@ -5,21 +5,22 @@ using Configs;
 using ProgramsLogic;
 using UI.Desktop.View;
 using UI.Desktop.ViewModel;
-using UI.Programs;
-using UI.Programs.Messenger;
+using UnityEngine;
 
 namespace UI.Desktop
 {
     public class ComputerFacade : IComputerFacade, IDisposable
     {
-        public IMessengerManager MessengerManager => _messengerManager;
-        
-        /// <summary>
-        /// Чат должен жить на протяжение все игры
-        /// </summary>
-        private readonly MessengerManager _messengerManager = new MessengerManager();
         private readonly ProgramStorage _storage = new ProgramStorage();
+        private readonly ClicksController _clicksController;
+        
+        private DesktopDialog? _desktop;
 
+        public ComputerFacade(ClicksController clicksController)
+        {
+            _clicksController = clicksController;
+        }
+        
         /// <summary>
         /// Установка программы
         /// </summary>
@@ -34,11 +35,22 @@ namespace UI.Desktop
         /// </summary>
         public void RemoveProgram(ProgramData program) => _storage.RemoveProgram(program.Type);
 
+        public bool TryGetInstalledProgram(ProgramType programType, out IProgram? program) =>
+            _storage.TryGetProgram(programType, out program);
+
+        public void BlockAllClicks() => _clicksController.TurnOnDisplayBlocker();
+        public void UnlockAllClicks() => _clicksController.TurnOffDisplayBlocker();
         public void OpenDesktop()
         {
+            if (_desktop != null)
+            {
+                Debug.LogError("ComputerFacade.OpenDesktop: desktop is already opened");
+                return;
+            }
+            
             var viewModel = new DesktopViewModel(_storage);
-            var desktop = Main.Instance.GuiManager.ShowDialog<DesktopDialog>();
-            desktop.Init(viewModel);
+            _desktop = Main.Instance.GuiManager.ShowDialog<DesktopDialog>();
+            _desktop.Init(viewModel);
         }
 
         public void Dispose()

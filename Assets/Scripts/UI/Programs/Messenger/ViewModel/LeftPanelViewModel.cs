@@ -18,7 +18,7 @@ namespace UI.Programs.Messenger.ViewModel
         public LeftPanelViewModel(MessengerManager manager)
         {
             _manager = manager;
-            _users = _manager.AllUserTypes.Select(type => new UserBlockViewModel(type, () => OnClickUser(type))).ToList();
+            _users = MessengerManager.AllUserTypes.Select(type => new UserBlockViewModel(type, () => OnClickUser(type))).ToList();
             _manager.OnChatSelected += UpdateChat;
         }
 

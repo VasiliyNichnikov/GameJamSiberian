@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using Configs;
 using UI.Desktop;
+using UI.Programs;
 using UI.Programs.Messenger;
 using UI.Programs.Messenger.View;
 using UI.Programs.Messenger.ViewModel;
@@ -12,12 +13,13 @@ namespace ProgramsLogic
     /// </summary>
     public class SwallowProgram : ProgramData
     {
+        public IMessengerManager Manager => _manager;
         public override ProgramType Type => ProgramType.Swallow;
-        private readonly MessengerManager _messengerManager;
+        private readonly MessengerManager _manager;
         
         public SwallowProgram(DesktopProgramContext context) : base(context)
         {
-            _messengerManager = new MessengerManager();
+            _manager = new MessengerManager();
         }
 
         public override void OnClickHandler()
@@ -28,7 +30,7 @@ namespace ProgramsLogic
             }
 
             var dialog = Main.Instance.GuiManager.ShowDialog<MessengerDialog>();
-            dialog.Init(new MessengerViewModel(_messengerManager));
+            dialog.Init(new MessengerViewModel(_manager));
             State.Open();
         }
     }
