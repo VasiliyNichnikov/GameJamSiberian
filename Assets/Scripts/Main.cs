@@ -10,6 +10,7 @@ public class Main : MonoBehaviour
 {
     public static Main Instance { get; private set; } = null!;
     public IDialogsManager GuiManager => _guiManager;
+    public IComputerFacade ComputerFacade => _gameLoader.ComputerFacade; // немного поговнокодим, не хотел отдавать через синглтон
 
     [SerializeField] private DialogsManager _guiManager = null!;
     [SerializeField] private SceneData _sceneData = null!;

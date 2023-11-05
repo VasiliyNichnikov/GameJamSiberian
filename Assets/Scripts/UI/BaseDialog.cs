@@ -1,4 +1,5 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace UI
@@ -7,6 +8,8 @@ namespace UI
     {
         private DialogsManager _manager;
 
+        [CanBeNull] private Action _onHideAction;
+        
         public void BaseInit(DialogsManager manager)
         {
             _manager = manager;
@@ -18,7 +21,16 @@ namespace UI
 
         public virtual void Hide()
         {
+            _onHideAction?.Invoke();
             _manager.RemoveDialog(this);
+        }
+
+        /// <summary>
+        /// Выставить действие которое вызовится при скрытие объекта
+        /// </summary>
+        public void SetHideAction(Action action)
+        {
+            _onHideAction = action;
         }
 
         public virtual void Dispose()

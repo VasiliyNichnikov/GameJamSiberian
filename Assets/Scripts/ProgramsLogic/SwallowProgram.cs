@@ -31,6 +31,7 @@ namespace ProgramsLogic
 
             var dialog = Main.Instance.GuiManager.ShowDialog<MessengerDialog>();
             dialog.Init(new MessengerViewModel(_manager));
+            dialog.SetHideAction(State.Close);
             State.Open();
         }
     }

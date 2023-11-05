@@ -21,3 +21,7 @@ MonoBehaviour:
     _miniGameData: {fileID: 0}
     _messengerData: {fileID: 11400000, guid: 57224a3acdca59e4f941348ed371ce7a, type: 2}
     _blackScreenData: {fileID: 0}
+  - _plotType: 1
+    _miniGameData: {fileID: 11400000, guid: 8f09bc6b2aeb40c4eafc2bfc69dbf771, type: 2}
+    _messengerData: {fileID: 0}
+    _blackScreenData: {fileID: 0}

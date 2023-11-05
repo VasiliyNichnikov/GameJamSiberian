@@ -1,8 +1,10 @@
 ﻿#nullable enable
+using System;
 using System.Collections;
 using UI.Programs.InstallerIDE.ViewModel;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI.Programs.InstallerIDE.View
 {
@@ -11,10 +13,16 @@ namespace UI.Programs.InstallerIDE.View
         [SerializeField] private Text _description = null!;
         [SerializeField] private GameObject _loaderComponent = null!;
         [SerializeField] private RectTransform _loadersHolder = null!;
+        [SerializeField] private GameObject _closeButtonObject = null!;
 
         private IEnumerator? _animation;
         private IInstallationViewModel _viewModel = null!;
-        
+
+        private void Start()
+        {
+            _closeButtonObject.SetActive(false);
+        }
+
         public void Init(IInstallationViewModel viewModel)
         {
             if (_animation != null)
@@ -22,7 +30,7 @@ namespace UI.Programs.InstallerIDE.View
                 Debug.LogError("InstallationView.Init: animation is not null");
                 return;
             }
-            
+
             _viewModel = viewModel;
             _description.text = viewModel.DescriptionText;
             _animation = LoadingAnimation();
@@ -36,24 +44,20 @@ namespace UI.Programs.InstallerIDE.View
         {
             _viewModel.OnClickCloseHandler();
         }
-        
+
         /// <summary>
         /// Симуляция загрузки
         /// </summary>
         /// <returns></returns>
         private IEnumerator LoadingAnimation()
         {
-            
-            for (int i =0; i<29; i++)
+            for (var i = 0; i < 29; i++)
             {
-                Debug.Log("Yes");
-                GameObject _spawnLoaderComponent = Instantiate(_loaderComponent, _loadersHolder);
-                
-                yield return new WaitForSeconds(0.3f);
+                Instantiate(_loaderComponent, _loadersHolder);
+                yield return new WaitForSeconds(Random.Range(0.15f, 0.5f));
             }
-
-
+            
+            _closeButtonObject.SetActive(true);
         }
-        
     }
 }

@@ -18,6 +18,7 @@ namespace Configs.Plot
             public string Text => _text;
             public float TimeOfWriting => _timeOfWriting;
             public int IdUser => _idUser;
+            public bool IsFile => _isFile;
             
             [SerializeField, TextArea, Header("Сообщение")] 
             private string _text;
@@ -27,6 +28,9 @@ namespace Configs.Plot
 
             [SerializeField, Range(1, 2), Header("Кто отправит сообщение")]
             private int _idUser;
+
+            [SerializeField, Header("Читай тултип"), Tooltip("Если стоит галка отрисуется кнопка с файлом и установкой")]
+            private bool _isFile;
         }
 
         public UserType UserType => _userType;

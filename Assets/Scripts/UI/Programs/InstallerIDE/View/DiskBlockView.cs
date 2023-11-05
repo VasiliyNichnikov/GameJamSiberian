@@ -12,7 +12,7 @@ namespace UI.Programs.InstallerIDE.View
         [SerializeField] private Text _nameDisk = null!;
         [SerializeField] private Text _amountOfSpace = null!;
         [SerializeField] private Slider _spaceSlider = null!;
-        [SerializeField] private CanvasGroup _canvasGroup = null!;
+        [SerializeField] private GameObject _selectableObject = null!;
 
         private IDiskBlockViewModel _viewModel = null!;
 
@@ -27,10 +27,7 @@ namespace UI.Programs.InstallerIDE.View
 
         private void OnSelectedDisk(bool isSelected)
         {
-            if (isSelected)
-                Debug.Log("yes");
-            else
-                Debug.Log("no");
+            _selectableObject.SetActive(isSelected);
         }
 
 

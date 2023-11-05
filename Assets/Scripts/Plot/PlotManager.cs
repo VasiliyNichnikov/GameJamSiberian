@@ -17,6 +17,7 @@ namespace Plot
         /// </summary>
         private int _currentPlotIndex = -1;
 
+        private bool _isGameCompleted = false;
         private readonly IComputerFacade _computerFacade;
 
         public PlotManager(IComputerFacade computerFacade)
@@ -42,6 +43,12 @@ namespace Plot
         /// </summary>
         public void CheckExecutionOfPlot()
         {
+            if (_isGameCompleted)
+            {
+                Debug.Log("PlotManager.OnComplete: игра завершена");
+                return;
+            }
+            
             // Сначала получаем текущий сюжет
             var currentPlot = _plots[_currentPlotIndex];
             if (!currentPlot.CheckCompletionCondition())
@@ -58,7 +65,7 @@ namespace Plot
             }
             else
             {
-                Debug.Log("PlotManager.OnComplete: игра завершена");
+                _isGameCompleted = true;
             }
         }
         

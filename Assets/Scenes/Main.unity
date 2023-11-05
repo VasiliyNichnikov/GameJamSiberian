@@ -601,6 +601,7 @@ MonoBehaviour:
   _trelloMiniGameData: {fileID: 11400000, guid: 58f0cedd3a1da0243a06ba95a2a19d43, type: 2}
   _programsIconData: {fileID: 11400000, guid: e694abf5d32df3c49ad092fbbfc5b761, type: 2}
   _plotData: {fileID: 11400000, guid: 9a175b1ff0676084ebb69dd2e9d4849d, type: 2}
+  _installerMiniGameData: {fileID: 11400000, guid: 7900576c565b7954cb88e3ffa2109b37, type: 2}
 --- !u!1 &872028351
 GameObject:
   m_ObjectHideFlags: 0

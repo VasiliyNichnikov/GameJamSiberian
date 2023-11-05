@@ -16,5 +16,16 @@ namespace ProgramsLogic
 
             IsOpened = true;
         }
+
+        public void Close()
+        {
+            if (!IsOpened)
+            {
+                Debug.LogWarning("ProgramState.Close: program is already closed");
+                return;
+            }
+
+            IsOpened = false;
+        }
     }
 }

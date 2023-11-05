@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Configs;
 using Configs.Plot;
+using UI.ClicksHandler;
+using UI.Desktop;
 using UnityEngine;
 
 namespace UI.Programs.Messenger
@@ -27,9 +29,11 @@ namespace UI.Programs.Messenger
         private readonly Queue<UnsentMessage> _unsentMessages = new();
 
         private readonly UserType _sendingUserType;
-        
-        public ChatManager(UserType sendingUserType)
+        private readonly IComputerFacade _facade;
+
+        public ChatManager(IComputerFacade facade, UserType sendingUserType)
         {
+            _facade = facade;
             _sendingUserType = sendingUserType;
             UserData = DataHelper.Instance.MessengerData.GetUserDataByType(sendingUserType);
         }
@@ -37,7 +41,33 @@ namespace UI.Programs.Messenger
         public void AddMessage(MessengerPlotData.MessageData messageData)
         {
             var fromMessage = messageData.IdUser == 1 ? _sendingUserType : UserType.Player;
-            _unsentMessages.Enqueue(new ResponseMessage(messageData.Text, UserData.Icon, fromMessage, messageData.TimeOfWriting));
+
+#if UNITY_EDITOR
+            if (fromMessage == UserType.Player && messageData.IsFile)
+            {
+                Debug.LogError("ChatManager.AddMessage: not corrected settings file");
+                return;
+            }
+#endif
+
+            if (fromMessage != UserType.Player && messageData.IsFile)
+            {
+                _unsentMessages.Enqueue(ResponseMessage.MessageWithFile(messageData.Text, UserData.Icon, fromMessage,
+                    messageData.TimeOfWriting, () =>
+                    {
+                        if (!_facade.TryGetInstalledProgram(ProgramType.InstallerIde, out var result))
+                        {
+                            Debug.LogError($"ChatManager.AddMessage: program not found {ProgramType.InstallerIde}");
+                            return;
+                        }
+
+                        result!.OnClickHandler();
+                    }));
+                return;
+            }
+
+            _unsentMessages.Enqueue(ResponseMessage.MessageWithMessage(messageData.Text, UserData.Icon, fromMessage,
+                messageData.TimeOfWriting));
         }
 
         public bool TryGetMessage(out UnsentMessage? message)

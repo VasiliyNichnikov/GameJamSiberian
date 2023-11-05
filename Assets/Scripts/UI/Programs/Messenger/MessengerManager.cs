@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Configs.Plot;
+using UI.Desktop;
 using UI.Programs.Messenger.View;
 using UI.Programs.Messenger.ViewModel;
 using UnityEngine;
@@ -28,8 +29,11 @@ namespace UI.Programs.Messenger
         private readonly Dictionary<UserType, ChatManager> _chats = new ();
 
         public static IReadOnlyCollection<UserType> AllUserTypes => Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
-
-        public MessengerManager() => InitializeChats();
+        
+        public MessengerManager()
+        {
+            InitializeChats();
+        }
         
 
         public void SelectUserChat(UserType type)
@@ -92,7 +96,7 @@ namespace UI.Programs.Messenger
         {
             foreach (var userType in AllUserTypes)
             {
-                var chat = new ChatManager(userType);
+                var chat = new ChatManager(Main.Instance.ComputerFacade, userType);
                 _chats[userType] = chat;
             }
         }

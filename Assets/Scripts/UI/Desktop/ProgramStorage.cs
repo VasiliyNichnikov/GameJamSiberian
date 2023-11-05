@@ -29,7 +29,7 @@ namespace UI.Desktop
         {
             if (_installedPrograms.ContainsKey(program.Type))
             {
-                Debug.LogError($"ProgramStorage.InstallProgram: the program is already installed");
+                Debug.LogError($"ProgramStorage.InstallProgram: the program is already installed: {program.Type}");
                 return;
             }
 

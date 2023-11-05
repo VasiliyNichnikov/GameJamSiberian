@@ -1,4 +1,6 @@
 ﻿#nullable enable
+using System;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -35,17 +37,17 @@ namespace UI.Programs.InstallerIDE.ViewModel
         private readonly DiskSelectionViewModel _diskSelectionViewModel;
         private readonly DeselectTogglesViewModel _deselectTogglesViewModel;
         private readonly InstallationViewModel _installationViewModel;
-        private readonly MissionLogicViewModel _missionLogicViewModel;
         private PageState _currentState = PageState.Welcome;
-        private bool _missionIsComplete = true;
 
-        public InstallerIDEViewModel()
+        private readonly Action _onHideDialog;
+        
+        public InstallerIDEViewModel(Action hideDialog)
         {
+            _onHideDialog = hideDialog;
             _welcomeViewModel = new WelcomeViewModel();
             _diskSelectionViewModel = new DiskSelectionViewModel();
             _deselectTogglesViewModel = new DeselectTogglesViewModel();
             _installationViewModel = new InstallationViewModel(CompletingInstallation);
-            _missionLogicViewModel = new MissionLogicViewModel();
 
 
             SetPageView(_currentState);
@@ -56,23 +58,18 @@ namespace UI.Programs.InstallerIDE.ViewModel
             switch (_currentState)
             {
                 case PageState.Welcome:
-                    if (_missionIsComplete)
-                    {
-                        _currentState = PageState.SelectionDisk;
-                        _missionIsComplete = false;
-                    }
+                    _currentState = PageState.SelectionDisk;
                     break;
                 case PageState.SelectionDisk:
-                    _missionIsComplete = _missionLogicViewModel.ChangeDiskLogic(_diskSelectionViewModel.GetSelectedDiskState());
-                    if (_missionIsComplete)
+                    var missionIsCompleteSelectionDisk = _diskSelectionViewModel.GetSelectedDiskState();
+                    if (missionIsCompleteSelectionDisk)
                     {
                         _currentState = PageState.DeselectToggles;
-                        _missionIsComplete = false;
                     }
                     break;
                 case PageState.DeselectToggles:
-                    _missionIsComplete = _missionLogicViewModel.DeselectTogglesLogic(_deselectTogglesViewModel.GetToggles());
-                    if (_missionIsComplete)
+                    var missionIsCompleteDeselectToggles = _deselectTogglesViewModel.GetToggles().All(toggle => !toggle.OnChangeToggle.Value);
+                    if (missionIsCompleteDeselectToggles)
                     {
                         _currentState = PageState.Installation;
                     }
@@ -89,7 +86,7 @@ namespace UI.Programs.InstallerIDE.ViewModel
 
         private void CompletingInstallation()
         {
-            // TODO нужно будет доделать
+            _onHideDialog?.Invoke();
         }
         
         private void SetPageView(PageState state)

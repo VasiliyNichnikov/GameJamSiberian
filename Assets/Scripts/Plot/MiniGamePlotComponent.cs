@@ -22,6 +22,9 @@ namespace Plot
                 case MiniGameType.EnteringPassword:
                     _miniGamePlot = new EnteringPasswordMiniGamePlot(computerFacade);
                     break;
+                case MiniGameType.InstallingIde:
+                    _miniGamePlot = new InstallingIdeMiniGamePlot(computerFacade);
+                    break;
                 default:
                     Debug.LogError($"MiniGamePlotComponent: not supported type: {_miniGamePlot}");
                     _miniGamePlot = new EmptyMiniGame();

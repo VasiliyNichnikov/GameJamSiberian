@@ -27,7 +27,7 @@ namespace UI.Desktop.ViewModel
 
         private void UpdateView(ProgramType type)
         {
-            _programsProp.Value = _storage.Programs;
+            _programsProp.Value = _storage.Programs.Where(program => program.NeedShowInDesktop).ToList();
         }
         
         public void Dispose()

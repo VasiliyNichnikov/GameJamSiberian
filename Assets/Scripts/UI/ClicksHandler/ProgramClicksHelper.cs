@@ -6,14 +6,19 @@ using UnityEngine;
 
 namespace UI.ClicksHandler
 {
+    /// <summary>
+    /// Пока нигде не нужна
+    /// Если нигде не пригодится - удалить
+    /// </summary>
     public class ProgramClicksHelper
     {
         private static readonly Dictionary<ProgramType, IProgramClicksHelper> _clicks =
-            new ()
+            new()
             {
                 { ProgramType.Swallow, new ProgramSwallowClickHelper() },
                 { ProgramType.IzbaSurf, new ProgramIzbaSurfClickHandler() },
-                { ProgramType.IDE, new ProgramIdeClickHelper() }
+                { ProgramType.IDE, new ProgramIdeClickHelper() },
+                { ProgramType.InstallerIde, new ProgramFileWithIdeClickHandler() }
             };
 
         public static bool OnClickDefaultHandler(ProgramType type, DesktopProgramContext context)
@@ -22,8 +27,8 @@ namespace UI.ClicksHandler
             {
                 return false;
             }
-            
-            
+
+
             if (_clicks.TryGetValue(type, out var result))
             {
                 result.OnClickHandler(context);

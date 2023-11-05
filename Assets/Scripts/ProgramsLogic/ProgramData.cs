@@ -11,6 +11,7 @@ namespace ProgramsLogic
     {
         public Sprite Icon { get; }
         public string Name { get; }
+        public bool NeedShowInDesktop => _context.NeedShowInDesktop;
         public abstract ProgramType Type { get; }
 
         private DesktopProgramContext _context;

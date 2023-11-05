@@ -32,6 +32,8 @@ namespace Game
             _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.IzbaSurf, DesktopProgramContext.Default()));
             // Устанавливаем мессенджер с возможностью в него попасть
             _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.Swallow, DesktopProgramContext.Default().SetAllowProgramToRun()));
+            // Устанавливаем загрузчик IDE (Он не будет показываться на рабочем столе)
+            _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.InstallerIde, DesktopProgramContext.Default().SetAllowProgramToRun().HideProgramFromDesktop()));
         }
     }
 }

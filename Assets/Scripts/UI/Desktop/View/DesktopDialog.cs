@@ -4,6 +4,7 @@ using ProgramsLogic;
 using UI.Desktop.ViewModel;
 using UniRx;
 using UnityEngine;
+using Utils;
 
 namespace UI.Desktop.View
 {
@@ -27,7 +28,8 @@ namespace UI.Desktop.View
             {
                 return;
             }
-            
+
+            _iconsHolder.DestroyChildren();
             foreach (var program in programs)
             {
                 var view = Instantiate(_programIconPrefab, _iconsHolder, false);

@@ -6,7 +6,7 @@ namespace UI.Programs.InstallerIDE.ViewModel
     public class DeselectToggleViewModel : IDeselectToggleBlockViewModel
     {
         public string Description { get; }
-
+        
         public IReactiveProperty<bool> OnChangeToggle => _onChangeToggle;
 
         private readonly ReactiveProperty<bool> _onChangeToggle = new ReactiveProperty<bool>();
@@ -20,11 +20,6 @@ namespace UI.Programs.InstallerIDE.ViewModel
         public void OnToggleClickHandler()
         {
             _onChangeToggle.Value = !_onChangeToggle.Value;
-        }
-
-        public bool GetValue()
-        {
-            return _onChangeToggle.Value;
         }
     }
 }
