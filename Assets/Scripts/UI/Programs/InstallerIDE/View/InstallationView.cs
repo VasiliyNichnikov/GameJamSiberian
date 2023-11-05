@@ -43,7 +43,16 @@ namespace UI.Programs.InstallerIDE.View
         /// <returns></returns>
         private IEnumerator LoadingAnimation()
         {
-            yield return null;
+            
+            for (int i =0; i<29; i++)
+            {
+                Debug.Log("Yes");
+                GameObject _spawnLoaderComponent = Instantiate(_loaderComponent, _loadersHolder);
+                
+                yield return new WaitForSeconds(0.3f);
+            }
+
+
         }
         
     }
