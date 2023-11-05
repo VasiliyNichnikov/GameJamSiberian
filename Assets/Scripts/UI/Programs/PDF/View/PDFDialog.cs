@@ -4,6 +4,7 @@ using UI.Programs.PDF.ViewModel;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace UI.Programs.PDF.View
 {
 
@@ -15,6 +16,11 @@ namespace UI.Programs.PDF.View
         {
             _viewModel = viewModel;
             _pdfView.Init(_viewModel.getData().Text);
+        }
+
+        public void CloseInstruction()
+        {
+            Destroy(gameObject);
         }
     }
 }

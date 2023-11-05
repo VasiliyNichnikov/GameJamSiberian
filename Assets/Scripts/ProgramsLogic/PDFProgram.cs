@@ -23,7 +23,7 @@ namespace ProgramsLogic
 
             var dialog = Main.Instance.GuiManager.ShowDialog<PDFDialog>();
             dialog.Init(new PDFViewModel());
-            State.Open();
+            /*State.Open();*/
         }
     }
 
