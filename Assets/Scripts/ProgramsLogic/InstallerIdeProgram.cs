@@ -3,6 +3,7 @@ using UI.Desktop;
 using UI.Programs.InstallerIDE.View;
 using UI.Programs.InstallerIDE.ViewModel;
 using UnityEngine;
+using Utils;
 
 namespace ProgramsLogic
 {
@@ -23,7 +24,7 @@ namespace ProgramsLogic
         {
             if (Main.Instance.ComputerFacade.IsProgramInstalled(ProgramType.IDE))
             {
-                Debug.LogWarning("InstallerIdeProgram.OnClickHandlerBase: program is already installed");
+                SimpleDialogsHelper.OpenWarningDialog("Плотник", "Программа уже установлена!");
                 return;
             }
             

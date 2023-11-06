@@ -2,6 +2,7 @@
 using Configs;
 using UI.Desktop;
 using UnityEngine;
+using Utils;
 
 namespace ProgramsLogic
 {
@@ -39,6 +40,7 @@ namespace ProgramsLogic
 
             if (!_context.AllowProgramToRun)
             {
+                SimpleDialogsHelper.OpenWarningDialog("Дружина", "Отказано в доступе!");
                 return;
             }
             

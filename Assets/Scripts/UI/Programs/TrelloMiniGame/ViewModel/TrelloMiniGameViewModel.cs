@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using UniRx;
 using UnityEngine;
+using Utils;
 
 namespace UI.Programs.TrelloMiniGame.ViewModel
 {
@@ -65,8 +66,7 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
             }
             else
             {
-                // TODO в доработках
-                Debug.LogWarning("TrelloMiniGameViewModel:OnClickSaveDataHandler: need show error");
+                SimpleDialogsHelper.OpenWarningDialog("Задачъник", "Кажется вы неверно отсортировали задачи");
             }
         }
     }

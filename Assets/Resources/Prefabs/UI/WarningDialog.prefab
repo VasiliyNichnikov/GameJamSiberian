@@ -895,7 +895,7 @@ PrefabInstance:
     - target: {fileID: 3227386060541246733, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: _dialog
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7116368891547406474}
     - target: {fileID: 4205203449536402194, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: m_Name
       value: DragArea
@@ -930,11 +930,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7096057436401017403, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -130
       objectReference: {fileID: 0}
     - target: {fileID: 7096057436401017403, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7096057436401017403, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: m_LocalPosition.x
@@ -966,7 +966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7096057436401017403, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -65
       objectReference: {fileID: 0}
     - target: {fileID: 7096057436401017403, guid: 1132821cdbded9d4393dfa125f7e9966, type: 3}
       propertyPath: m_AnchoredPosition.y
