@@ -3,7 +3,11 @@
     public enum UserType
     {
         Player, // Игрок
-        Chief   // Начальник
+        Chief,   // Начальник
+        IconPainter,
+        Kotoved,
+        Tester,
+        InformationCollector
     }
 
 }
