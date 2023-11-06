@@ -61,12 +61,24 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
         {
             switch (tag)
             {
-                case TrelloMiniGameData.TaskTag.UI:
-                    return "UI";
-                case TrelloMiniGameData.TaskTag.Code:
-                    return "CODE";
-                case TrelloMiniGameData.TaskTag.Idea:
-                    return "IDEA";
+                case TrelloMiniGameData.TaskTag.Ornament:
+                    return "Орнамент";
+                case TrelloMiniGameData.TaskTag.DigitalIconography:
+                    return "Цифровая иконопись";
+                case TrelloMiniGameData.TaskTag.SymbolistDecipherer:
+                    return "Символист-разгадчик";
+                case TrelloMiniGameData.TaskTag.CatResearcher:
+                    return "Котоисследователь";
+                case TrelloMiniGameData.TaskTag.Codifier:
+                    return "Кодификатор";
+                case TrelloMiniGameData.TaskTag.CipherComposer:
+                    return "Шифрокомпозитор";
+                case TrelloMiniGameData.TaskTag.Accounts:
+                    return "Счёты";
+                case TrelloMiniGameData.TaskTag.NegotiationsWithClient:
+                    return "Переговоры с клиентом";
+                case TrelloMiniGameData.TaskTag.Chronicles:
+                    return "Летописи";
                 default:
                     Debug.LogError($"TrelloTaskViewModel.ConvertTag: not corrected type: {tag}");
                     return "UNKNOWN";
