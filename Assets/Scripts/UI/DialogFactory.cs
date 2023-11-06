@@ -22,6 +22,7 @@ namespace UI
             { typeof(InstallerIDEDialog), "Prefabs/UI/InstallerIDE/InstallerIdeDialog" },
             { typeof(PDFDialog), "Prefabs/UI/PDF/PDFDialog" },
             { typeof(BluerDialog), "Prefabs/UI/BluerDialog" },
+            {typeof(ErrorDialog), "Prefabs/UI/Desktop/ErrorDialog"}
         };
         
         public T CreateDialog<T>(Transform parentDialog) where T : BaseDialog
