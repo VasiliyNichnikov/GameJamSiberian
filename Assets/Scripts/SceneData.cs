@@ -11,7 +11,6 @@ public class SceneData : MonoBehaviour
     /// Родитель в котором создаются диалоге
     /// </summary>
     public Transform DialogsParent => _dialogsParent;
-
     public DisplayBlocker DisplayBlocker => _displayBlocker;
     
     [SerializeField] private Transform _dialogsParent = null!;

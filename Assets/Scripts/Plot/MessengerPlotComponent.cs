@@ -45,6 +45,7 @@ namespace Plot
             {
                 _messengerManager = messenger.Manager;
                 _messengerManager.LoadMessagesInChats(_data);
+                messenger.OnClickHandler();
                 _messengerManager.SelectUserChat(_data.UserType);
             }
             else

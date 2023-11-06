@@ -22,11 +22,6 @@ namespace UI.Programs
         void SelectUserChat(UserType type);
 
         /// <summary>
-        /// Открываем чат
-        /// </summary>
-        void OpenMessenger();
-
-        /// <summary>
         /// Загружаем сообщения в чаты
         /// </summary>
         void LoadMessagesInChats(MessengerPlotData data);
