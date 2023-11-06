@@ -36,9 +36,6 @@ namespace Game
             _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.PDF, DesktopProgramContext.Default().SetAllowProgramToRun()));
             // Устанавливаем загрузчик IDE (Он не будет показываться на рабочем столе)
             _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.InstallerIde, DesktopProgramContext.Default().SetAllowProgramToRun().HideProgramFromDesktop()));
-            
-            // Для теста
-            _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.IDE, DesktopProgramContext.Default().SetAllowProgramToRun()));
         }
     }
 }

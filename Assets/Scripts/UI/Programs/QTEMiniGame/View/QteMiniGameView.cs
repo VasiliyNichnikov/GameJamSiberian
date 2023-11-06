@@ -23,8 +23,11 @@ namespace UI.Programs.QTEMiniGame.View
         
         private bool _isInitialized;
 
+        private IQteMiniGameViewModel _viewModel;
+        
         public void Init(IQteMiniGameViewModel viewModel)
         {
+            _viewModel = viewModel;
             HolderView.Init();
             EditorView.Init(_viewModel.EditorViewModel);
 

@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: QteMiniGameData
   m_EditorClassIdentifier: 
   _needKeys: 7100000077000000650000003001000020000000
-  _timeBetweenQte: 1
-  _qteTime: 2
+  _maxTimeBetweenQte: 3
+  _maxQteTime: 2
+  _minTimeBetweenQte: 1
+  _minQteTime: 2
+  _qteScaler: 0.1
+  _accuracyLimit: 0.5
+  _numberRecalculate: 5
   _programText: "using System.Collections.Generic;\r\nusing System.Collections.ObjectModel;\r\nusing
     System.Linq;\r\nusing Configs;\r\nusing UniRx;\r\n\r\nnamespace UI.Programs.TrelloMiniGame.ViewModel\r\n{\r\n   
     public class TrelloColumnViewModel : ITrelloColumnViewModel\r\n    {\r\n       

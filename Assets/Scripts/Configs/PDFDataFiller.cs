@@ -8,6 +8,6 @@ namespace Configs
     public class PDFDataFiller : ScriptableObject
     {
         public string Text => _text;
-        [SerializeField, TextArea, Header("Заполнение инструкции")] private string _text = null!;
+        [SerializeField, TextArea(20, 20), Header("Заполнение инструкции")] private string _text = null!;
     }
 }

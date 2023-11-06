@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,11 +29,11 @@ namespace Configs
         [SerializeField, Header("Минимальное время между QTE (сек) - сложный уровень")] private float _minTimeBetweenQte;
         [SerializeField, Header("Минимальное время на то, чтобы нажать клавишу (сек) - сложный уровень")] private float _minQteTime;
         
-        [SerializeField, Header("Число, на которое будет умножаться время [0; 1]")] private float _qteScaler;
-        [SerializeField, Header("Порог точности, при котором повышается сложность [0; 1]")] private float _accuracyLimit;
+        [SerializeField, Header("Число, на которое будет умножаться время [0; 1]"), Range(0, 1)] private float _qteScaler;
+        [SerializeField, Header("Порог точности, при котором повышается сложность [0; 1]"), Range(0, 3)] private float _accuracyLimit;
         [SerializeField, Header("Число попыток, через сколько будет пересчитывться точность")] private int _numberRecalculate;
 
-        [SerializeField, Header("Текст для отоброжения (не забывайте про строки)"), Multiline] private string _programText = null!;
+        [SerializeField, Header("Текст для отоброжения (не забывайте про строки)"), Multiline, TextArea(20, 20)] private string _programText = null!;
         [SerializeField, Header("Скорость появления новых символов в тексте (сек)")] private float _delay;
         [SerializeField, Header("Кол-во символов, которое будет удаляться за ошибку")] private int _numberSymbolsForDeleteInIteration;
     }

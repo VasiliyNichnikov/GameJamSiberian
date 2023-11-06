@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ddc8e096b6499287e19b82dd7658a1, type: 3}
+  m_Name: InstallerMiniGameData
+  m_EditorClassIdentifier: 
+  _welcomeData:
+    _title: 
+    _description: 
+  _diskSelectionData:
+    _titleText: 
+    _descriptionText: 
+    _numberOfCorrectedDisk: 0
+    _disks:
+    - _nameDisk: 
+      _amountOfSpace: 
+      _occupiedSpace: 0
+  _deselectTogglesData:
+    _titleText: 
+    _descriptionText: 
+    _togglesData: []
+  _simulationInstallationData:
+    _titleText: 
+    _descriptionText: 

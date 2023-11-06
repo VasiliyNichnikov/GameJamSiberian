@@ -12,23 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7700dca8f944961b4904ec92b78be50, type: 3}
   m_Name: MessengerData
   m_EditorClassIdentifier: 
-  _chats:
-  - _userType: 1
-    _messages:
-    - _messageSendingData: {fileID: 11400000, guid: ba44c71851bfa644cb1dea237c6ab8de, type: 2}
-      _messageResponseData: {fileID: 0}
-    - _messageSendingData: {fileID: 0}
-      _messageResponseData: {fileID: 11400000, guid: d2cb87b2067f18b4786cf9f8960e4dcb, type: 2}
-    - _messageSendingData: {fileID: 11400000, guid: 4e1d51d7fa7555048bdef6f6fcb37f93, type: 2}
-      _messageResponseData: {fileID: 0}
-  - _userType: 0
-    _messages:
-    - _messageSendingData: {fileID: 11400000, guid: ba44c71851bfa644cb1dea237c6ab8de, type: 2}
-      _messageResponseData: {fileID: 0}
-    - _messageSendingData: {fileID: 0}
-      _messageResponseData: {fileID: 11400000, guid: d2cb87b2067f18b4786cf9f8960e4dcb, type: 2}
-    - _messageSendingData: {fileID: 11400000, guid: 4e1d51d7fa7555048bdef6f6fcb37f93, type: 2}
-      _messageResponseData: {fileID: 0}
   _users:
   - _userName: "\u0418\u0437\u0431\u0440\u0430\u043D\u043D\u043E\u0435"
     _userSurname: 
