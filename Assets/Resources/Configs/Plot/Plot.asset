@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Plot
   m_EditorClassIdentifier: 
   _plots:
+  - _plotType: 2
+    _miniGameData: {fileID: 0}
+    _messengerData: {fileID: 0}
+    _blackScreenData: {fileID: 11400000, guid: 21b7aee3da1386340a88d00b6dd294d1, type: 2}
   - _plotType: 1
     _miniGameData: {fileID: 11400000, guid: 4f5975db5e378b045ab0dbfde53e6ff6, type: 2}
     _messengerData: {fileID: 0}

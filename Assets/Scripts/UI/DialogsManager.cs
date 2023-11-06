@@ -1,6 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
-using UI.Programs;
+using UI.Bluer;
 using UnityEngine;
 
 namespace UI
@@ -10,16 +10,23 @@ namespace UI
         private readonly List<BaseDialog> _openDialogs = new ();
 
         private DialogFactory _factory = null!;
+        private Transform _parentDialogs = null!;
+        private Transform _bluerParent = null!;
         
-        public void Init(Transform parentDialogs)
+        public void Init(Transform parentDialogs, Transform bluerParent)
         {
-            _factory = new DialogFactory(parentDialogs);
+            _parentDialogs = parentDialogs;
+            _bluerParent = bluerParent;
+            _factory = new DialogFactory();
         }
         
-        
-        public T ShowDialog<T>() where T : BaseDialog
+        public BluerDialog ShowBluer() => ShowDialog<BluerDialog>(_bluerParent);
+
+        public T ShowDialog<T>() where T : BaseDialog => ShowDialog<T>(_parentDialogs);
+
+        private T ShowDialog<T>(Transform parent) where T : BaseDialog
         {
-            var dialog = _factory.CreateDialog<T>();
+            var dialog = _factory.CreateDialog<T>(parent);
             if (dialog == null)
             {
                 Debug.LogError("DialogsManager.ShowDialog dialog is null");

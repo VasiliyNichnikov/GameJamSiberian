@@ -37,7 +37,7 @@ public class Main : MonoBehaviour
     private void Start()
     {
         // Порядок важен
-        _guiManager.Init(_sceneData.DialogsParent);
+        _guiManager.Init(_sceneData.DialogsParent, _sceneData.BluerParent);
         
         _gameLoader.LoadGame();
 

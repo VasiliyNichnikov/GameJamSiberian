@@ -12,7 +12,9 @@ public class SceneData : MonoBehaviour
     /// </summary>
     public Transform DialogsParent => _dialogsParent;
     public DisplayBlocker DisplayBlocker => _displayBlocker;
+    public Transform BluerParent => _bluerParent;
     
     [SerializeField] private Transform _dialogsParent = null!;
     [SerializeField] private DisplayBlocker _displayBlocker = null!;
+    [SerializeField] private Transform _bluerParent = null!;
 }

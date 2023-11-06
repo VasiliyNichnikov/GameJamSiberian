@@ -1,6 +1,7 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using UI.Bluer;
 using UI.Desktop.View;
 using UI.Programs.InstallerIDE.View;
 using UI.Programs.Messenger.View;
@@ -20,16 +21,10 @@ namespace UI
             { typeof(DesktopDialog), "Prefabs/UI/Desktop/DesktopDialog" },
             { typeof(InstallerIDEDialog), "Prefabs/UI/InstallerIDE/InstallerIdeDialog" },
             { typeof(PDFDialog), "Prefabs/UI/PDF/PDFDialog" },
+            { typeof(BluerDialog), "Prefabs/UI/BluerDialog" },
         };
-
-        private readonly Transform _parentDialogs;
-
-        public DialogFactory(Transform parentDialogs)
-        {
-            _parentDialogs = parentDialogs;
-        }
-
-        public T CreateDialog<T>() where T : BaseDialog
+        
+        public T CreateDialog<T>(Transform parentDialog) where T : BaseDialog
         {
             if (!_dialogsPath.TryGetValue(typeof(T), out var path))
             {
@@ -37,7 +32,7 @@ namespace UI
             }
 
             var prefab = Resources.Load<T>(path);
-            var dialog = Object.Instantiate(prefab, _parentDialogs, false);
+            var dialog = Object.Instantiate(prefab, parentDialog, false);
             dialog.transform.SetAsLastSibling();
             return dialog;
         }
