@@ -28,7 +28,7 @@ namespace UI.Programs.Messenger
 
         private readonly Dictionary<UserType, ChatManager> _chats = new ();
 
-        public static IReadOnlyCollection<UserType> AllUserTypes => Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+        public static IReadOnlyCollection<UserType> AllUserTypes => new[] { UserType.Chief };
         
         public MessengerManager()
         {

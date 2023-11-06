@@ -6,7 +6,6 @@ using System.Linq;
 using UI.Programs.Messenger;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace Configs
 {
@@ -15,9 +14,15 @@ namespace Configs
     {
         public enum TaskTag
         {
-            UI,
-            Code,
-            Idea
+            Ornament,
+            DigitalIconography,
+            SymbolistDecipherer,
+            CatResearcher,
+            Codifier,
+            CipherComposer,
+            Accounts,
+            NegotiationsWithClient,
+            Chronicles
         }
         
         [Serializable]
