@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TheEnd
   m_EditorClassIdentifier: 
   _title: 
-  _descriptionText: "\u0412\u044B \u0443\u0432\u043E\u043B\u0435\u043D\u044B:("
+  _descriptionText: "\u0412\u044B \u0443\u0432\u043E\u043B\u0435\u043D\u044B:(\n\n\u0421\u043F\u0430\u0441\u0438\u0431\u043E
+    \u0437\u0430 \u0438\u0433\u0440\u0443!"
   _timeWriting: 5
   _skipOpenAnimation: 0

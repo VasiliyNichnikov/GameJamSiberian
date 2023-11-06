@@ -70,7 +70,6 @@ namespace UI.Programs.QTEMiniGame.View
                 if (!BuildButton.interactable)
                 {
                     _isCompleted = true;
-                    _onCompleteMiniGame?.Invoke();
                     UpdateColorButton();
                     BuildButton.interactable = true;
                 }
@@ -165,6 +164,7 @@ namespace UI.Programs.QTEMiniGame.View
 
         public void OnBuildButtonClick()
         {
+            _onCompleteMiniGame?.Invoke();
             Hide();
         }
     }
