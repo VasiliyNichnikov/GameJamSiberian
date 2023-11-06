@@ -12,7 +12,7 @@ using Utils;
 
 namespace UI.Programs.Messenger.View
 {
-    public class ChatView : MonoBehaviour
+    public class ChatView : MonoBehaviour, IDisposable
     {
         [SerializeField] private ChatUserView _chatUserView = null!;
         [SerializeField] private RectTransform _contentHolder = null!;
@@ -94,9 +94,13 @@ namespace UI.Programs.Messenger.View
             
             _animationOfWriting = null;
         }
-
-        private void OnDestroy()
+        
+        public void Dispose()
         {
+            if (_animationOfWriting != null)
+            {
+                StopCoroutine(_animationOfWriting);
+            }
             _viewModel.UploadedMessagesToSend -= TryStartAnimationSendingMessageToChat;
         }
     }

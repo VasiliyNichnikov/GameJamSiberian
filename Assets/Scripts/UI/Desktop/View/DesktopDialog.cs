@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using ProgramsLogic;
 using UI.Desktop.ViewModel;
-using UniRx;
 using UnityEngine;
 using Utils;
 
@@ -10,6 +9,8 @@ namespace UI.Desktop.View
 {
     public class DesktopDialog : BaseDialog
     {
+        public override bool CanCloseWithAllDialogs => false;
+
         [SerializeField] private RectTransform _iconsHolder = null!;
         [SerializeField] private ProgramIconView _programIconPrefab = null!;
 

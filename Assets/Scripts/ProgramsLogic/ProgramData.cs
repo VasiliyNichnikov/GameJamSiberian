@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using Configs;
+using UI;
 using UI.Desktop;
 using UnityEngine;
 using Utils;
@@ -14,14 +15,15 @@ namespace ProgramsLogic
         public abstract ProgramType Type { get; }
 
         private DesktopProgramContext _context;
-        protected readonly ProgramState State;
+        private readonly ProgramState _stateProgram;
+        private BaseDialog? _openedDialog;
 
         protected ProgramData(DesktopProgramContext context)
         {
             var data = DataHelper.Instance.ProgramsIconData.GetIconDataByType(Type);
             Icon = data.Sprite;
             Name = data.Name;
-            State = new ProgramState();
+            _stateProgram = new ProgramState();
 
             _context = context;
         }
@@ -31,10 +33,27 @@ namespace ProgramsLogic
             _context = context;
         }
 
+        protected void OpenProgram(BaseDialog dialog)
+        {
+            _openedDialog = dialog;
+            _stateProgram.Open();
+        }
+
+        protected void CloseProgram()
+        {
+            _openedDialog = null;
+            _stateProgram.Close();
+        }
+        
         public void OnClickHandler()
         {
-            if (State.IsOpened)
+            if (_stateProgram.IsOpened)
             {
+                if (_openedDialog != null)
+                {
+                    _openedDialog.transform.SetAsLastSibling();
+                }
+                
                 return;
             }
 

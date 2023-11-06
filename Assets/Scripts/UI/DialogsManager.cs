@@ -1,5 +1,6 @@
 #nullable enable
 using System.Collections.Generic;
+using System.Linq;
 using UI.Bluer;
 using UnityEngine;
 
@@ -23,6 +24,16 @@ namespace UI
         public BluerDialog ShowBluer() => ShowDialog<BluerDialog>(_bluerParent);
 
         public T ShowDialog<T>() where T : BaseDialog => ShowDialog<T>(_parentDialogs);
+        public void HideAllActiveDialogs()
+        {
+            var dialogsForHide = _openDialogs.Where(dialog => dialog.CanCloseWithAllDialogs).ToArray();
+            var countElements = dialogsForHide.Length;
+            for (var i = 0; i < countElements; i++)
+            {
+                var dialog = dialogsForHide[i];
+                RemoveDialog(dialog);
+            }
+        }
 
         private T ShowDialog<T>(Transform parent) where T : BaseDialog
         {
@@ -47,7 +58,8 @@ namespace UI
                 Debug.LogError("DialogsManager.RemoveDialog dialog not contains in list");
                 return;
             }
-            
+
+            dialog.Dispose();
             dialog.gameObject.SetActive(false);
             _openDialogs.Remove(dialog);
             Destroy(dialog.gameObject);

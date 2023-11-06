@@ -8,6 +8,8 @@ namespace UI
     {
         private DialogsManager _manager;
 
+        public virtual bool CanCloseWithAllDialogs { get; } = true;
+        
         [CanBeNull] private Action _onHideAction;
         
         public void BaseInit(DialogsManager manager)
@@ -36,11 +38,6 @@ namespace UI
         public virtual void Dispose()
         {
             // override me
-        }
-
-        private void OnDestroy()
-        {
-            Dispose();
         }
     }
 }

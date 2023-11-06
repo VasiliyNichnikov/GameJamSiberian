@@ -32,10 +32,10 @@ namespace ProgramsLogic
             dialog.Init(new InstallerIDEViewModel(dialog.Hide));
             dialog.SetHideAction(() =>
             {
-                State.Close();
+                CloseProgram();
                 IsCompleted = true;
             });
-            State.Open();
+            OpenProgram(dialog);
         }
     }
 }

@@ -17,8 +17,8 @@ namespace ProgramsLogic
         {
             var dialog = Main.Instance.GuiManager.ShowDialog<QteMiniGameView>();
             dialog.Init(new QteMiniGameViewModel());
-            dialog.SetHideAction(State.Close);
-            State.Open();
+            dialog.SetHideAction(CloseProgram);
+            OpenProgram(dialog);
         }
     }
 }
