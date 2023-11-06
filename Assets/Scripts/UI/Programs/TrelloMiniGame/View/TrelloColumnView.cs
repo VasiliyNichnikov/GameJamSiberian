@@ -23,10 +23,12 @@ namespace UI.Programs.TrelloMiniGame.View
 
         public void Init(ITrelloColumnViewModel viewModel)
         {
+            // Порядок важен
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
             _pool = new TrelloTasksPool(_columnHolder, _taskViewPrefab);
             _title.text = viewModel.TitleColumn;
-            _viewModel = viewModel;
-            _viewModel.Tasks.ObserveEveryValueChanged(x => x.Value).Subscribe(CreateTasks);
+            
+            gameObject.Subscribe(_viewModel.Tasks, CreateTasks);
         }
 
         private void CreateTasks(IReadOnlyCollection<ITrelloTaskViewModel> tasks)

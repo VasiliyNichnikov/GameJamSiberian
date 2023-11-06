@@ -43,7 +43,6 @@ namespace UI.Programs.Messenger.ViewModel
         {
             if (_chatManager == null)
             {
-                Debug.LogError("ChatViewModel.ReceiveUnsentMessages: chat is not initialized");
                 yield break;
             }
 

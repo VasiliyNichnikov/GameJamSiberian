@@ -16,7 +16,7 @@ namespace UI.Programs.InstallerIDE.View
         
         public void Init(IDeselectTogglesViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
             _description.text = _viewModel.DescriptionText;
             CreateDeselectToggles();
         }

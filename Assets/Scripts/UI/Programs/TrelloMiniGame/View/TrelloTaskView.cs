@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using System;
 using Pool;
 using UI.Programs.TrelloMiniGame.ViewModel;
 using UnityEngine;
@@ -24,7 +23,7 @@ namespace UI.Programs.TrelloMiniGame.View
         
         public void Init(ITrelloTaskViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
             _title.text = _viewModel.Title;
             _userName.text = _viewModel.UserName;
             _userSurname.text = _viewModel.UserSurname;

@@ -3,6 +3,7 @@ using UI.Programs.InstallerIDE.ViewModel;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace UI.Programs.InstallerIDE.View
 {
@@ -15,15 +16,14 @@ namespace UI.Programs.InstallerIDE.View
         
         public void Init(IDeselectToggleBlockViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
+            gameObject.Subscribe(_viewModel.OnChangeToggle, ChangeValue);
             _description.text = _viewModel.Description;
-            _viewModel.OnChangeToggle.ObserveEveryValueChanged(x => x.Value).Subscribe(ChangeValue);
+            
             _toggle.onValueChanged.AddListener(OnToggleClicked);
         }
-        /// <summary>
-        /// Called from unity
-        /// </summary>
-        public void OnToggleClicked(bool isOn) => _viewModel.OnToggleClickHandler();
+        
+        private void OnToggleClicked(bool isOn) => _viewModel.OnToggleClickHandler();
         
         private void ChangeValue(bool value) => _toggle.isOn = value;
     }

@@ -1,10 +1,9 @@
 ﻿#nullable enable
-using System;
 using System.Collections;
 using UI.Programs.InstallerIDE.ViewModel;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
+using Utils;
 
 namespace UI.Programs.InstallerIDE.View
 {
@@ -31,7 +30,7 @@ namespace UI.Programs.InstallerIDE.View
                 return;
             }
 
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
             _description.text = viewModel.DescriptionText;
             _animation = LoadingAnimation();
             StartCoroutine(_animation);

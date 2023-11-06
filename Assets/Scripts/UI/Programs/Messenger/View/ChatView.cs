@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Configs;
 using UI.Programs.Messenger.ViewModel;
 using UniRx;
@@ -11,7 +12,7 @@ using Utils;
 
 namespace UI.Programs.Messenger.View
 {
-    public class ChatView : MonoBehaviour, IDisposable
+    public class ChatView : MonoBehaviour
     {
         [SerializeField] private ChatUserView _chatUserView = null!;
         [SerializeField] private RectTransform _contentHolder = null!;
@@ -24,13 +25,19 @@ namespace UI.Programs.Messenger.View
         
         public void Init(IChatViewModel viewModel)
         {
-            _viewModel = viewModel;
-            _viewModel.SentMessages.ObserveEveryValueChanged(x => x.Value).Subscribe(CreateSentMessages);
-            _viewModel.SelectedUser.ObserveEveryValueChanged(x => x.Value).Subscribe(UpdateUserData);
-
-            _viewModel.UploadedMessagesToSend += StartAnimationSendingMessageToChat;
+            // Выглядит плохо, но лучше пусть будет на всякий случай
+            if (_viewModel != null!)
+            {
+                _viewModel.UploadedMessagesToSend -= TryStartAnimationSendingMessageToChat;
+            }
             
-            StartAnimationSendingMessageToChat();
+            gameObject.UpdateViewModelWithDisposable(ref _viewModel!, viewModel);
+            gameObject.Subscribe(_viewModel.SentMessages, CreateSentMessages);
+            gameObject.Subscribe(_viewModel.SelectedUser, UpdateUserData);
+
+            _viewModel.UploadedMessagesToSend += TryStartAnimationSendingMessageToChat;
+
+            TryStartAnimationSendingMessageToChat();
         }
 
         private void UpdateUserData(MessengerData.UserData? data)
@@ -60,7 +67,7 @@ namespace UI.Programs.Messenger.View
             }
         }
 
-        private void StartAnimationSendingMessageToChat()
+        private void TryStartAnimationSendingMessageToChat()
         {
             if (_animationOfWriting != null)
             {
@@ -68,6 +75,11 @@ namespace UI.Programs.Messenger.View
                 return;
             }
 
+            if (!_viewModel.ReceiveUnsentMessages().Any())
+            {
+                return;
+            }
+            
             _animationOfWriting = AnimationSendingMessageToChat(_viewModel.ReceiveUnsentMessages());
             StartCoroutine(_animationOfWriting);
         }
@@ -83,10 +95,9 @@ namespace UI.Programs.Messenger.View
             _animationOfWriting = null;
         }
 
-        public void Dispose()
+        private void OnDestroy()
         {
-            _viewModel.UploadedMessagesToSend -= StartAnimationSendingMessageToChat;
-            _viewModel.Dispose();
+            _viewModel.UploadedMessagesToSend -= TryStartAnimationSendingMessageToChat;
         }
     }
 }

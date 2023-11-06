@@ -4,6 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Utils;
 
 namespace UI.Programs.Messenger.View
 {
@@ -17,11 +18,11 @@ namespace UI.Programs.Messenger.View
         
         public void Init(IUserBlockViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
             _iconUser.sprite = viewModel.Icon;
             _nameUser.text = viewModel.NameUser;
 
-            _viewModel.IsSelected.ObserveEveryValueChanged(x => x.Value).Subscribe(isSelected =>
+            gameObject.Subscribe(_viewModel.IsSelected, isSelected =>
             {
                 _selectableImage.SetActive(isSelected);
             });

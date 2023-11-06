@@ -46,10 +46,5 @@ namespace ProgramsLogic
         }
 
         protected abstract void OnClickHandlerBase();
-
-        public void Dispose()
-        {
-            // nothing
-        }
     }
 }

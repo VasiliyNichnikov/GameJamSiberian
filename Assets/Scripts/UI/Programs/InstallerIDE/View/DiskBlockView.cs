@@ -4,6 +4,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Utils;
 
 namespace UI.Programs.InstallerIDE.View
 {
@@ -18,11 +19,12 @@ namespace UI.Programs.InstallerIDE.View
 
         public void Init(IDiskBlockViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
+            gameObject.Subscribe(_viewModel.IsSelected, OnSelectedDisk);
+            
             _nameDisk.text = _viewModel.NameDisk;
             _amountOfSpace.text = _viewModel.AmountOfSpace;
             _spaceSlider.value = _viewModel.OccupiedSpace;
-            _viewModel.IsSelected.ObserveEveryValueChanged(x => x.Value).Subscribe(OnSelectedDisk);
         }
 
         private void OnSelectedDisk(bool isSelected)

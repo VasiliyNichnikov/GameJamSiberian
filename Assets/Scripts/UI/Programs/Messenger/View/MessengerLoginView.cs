@@ -2,6 +2,7 @@
 using UI.Programs.Messenger.ViewModel;
 using UnityEngine;
 using UnityEngine.UI;
+using Utils;
 
 namespace UI.Programs.Messenger.View
 {
@@ -14,7 +15,7 @@ namespace UI.Programs.Messenger.View
         
         public void Init(IMessengerLoginViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
         }
 
         /// <summary>

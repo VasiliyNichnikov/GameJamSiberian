@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UI.Programs.TrelloMiniGame.ViewModel;
 using UniRx;
 using UnityEngine;
+using Utils;
 
 namespace UI.Programs.TrelloMiniGame.View
 {
@@ -15,15 +16,14 @@ namespace UI.Programs.TrelloMiniGame.View
         
         public void Init(ITrelloMiniGameViewModel viewModel)
         {
-            _viewModel = viewModel;
-
+            gameObject.UpdateViewModel(ref _viewModel, viewModel);
+            gameObject.Subscribe(_viewModel.IsCompleted, isActive => _saveButtonObject.SetActive(!isActive));
+            
             Debug.Assert(_viewModel.Columns.Count == _columnViews.Count, "The number of columns and models does not match");
             for (var i = 0; i < _viewModel.Columns.Count; i++)
             {
                 _columnViews[i].Init(_viewModel.Columns[i]);
             }
-
-            _viewModel.IsCompleted.ObserveEveryValueChanged(x => x.Value).Subscribe(isActive => _saveButtonObject.SetActive(!isActive));
         }
 
         /// <summary>

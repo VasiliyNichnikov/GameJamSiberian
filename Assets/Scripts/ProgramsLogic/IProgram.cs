@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProgramsLogic
 {
-    public interface IProgram : IDisposable
+    public interface IProgram
     {
         bool NeedShowInDesktop { get; }
         Sprite Icon { get; }

@@ -2,6 +2,7 @@
 using UI.Programs.Messenger.ViewModel;
 using UniRx;
 using UnityEngine;
+using Utils;
 
 namespace UI.Programs.Messenger.View
 {
@@ -16,9 +17,9 @@ namespace UI.Programs.Messenger.View
         
         public void Init(IMessengerViewModel viewModel)
         {
-            _viewModel = viewModel;
+            gameObject.UpdateViewModelWithDisposable(ref _viewModel, viewModel);
 
-            _viewModel.IsLoginState.ObserveEveryValueChanged(x => x.Value).Subscribe(isActive =>
+            gameObject.Subscribe(_viewModel.IsLoginState, isActive =>
             {
                 _loginView.gameObject.SetActive(isActive);
                 if (isActive)
@@ -26,8 +27,8 @@ namespace UI.Programs.Messenger.View
                     _loginView.Init(_viewModel.LoginViewModel);
                 }
             });
-            
-            _viewModel.IsChatState.ObserveEveryValueChanged(x => x.Value).Subscribe(isActive =>
+
+            gameObject.Subscribe(_viewModel.IsChatState, isActive =>
             {
                 _chatHolder.SetActive(isActive);
                 if (isActive)
@@ -36,12 +37,6 @@ namespace UI.Programs.Messenger.View
                     _chatView.Init(_viewModel.ChatViewModel);
                 }
             });
-        }
-
-        public override void Dispose()
-        {
-            _viewModel.Dispose();
-            _chatView.Dispose();
         }
     }
 }

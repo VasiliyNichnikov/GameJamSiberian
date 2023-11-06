@@ -17,9 +17,8 @@ namespace UI.Desktop.View
         
         public void Init(IDesktopViewModel viewModel)
         {
-            _viewModel = viewModel;
-
-            _viewModel.Programs.ObserveEveryValueChanged(x => x.Value).Subscribe(CreateIcons);
+            gameObject.UpdateViewModelWithDisposable(ref _viewModel, viewModel);
+            gameObject.Subscribe(_viewModel.Programs, CreateIcons);
         }
 
         private void CreateIcons(IReadOnlyCollection<IProgram>? programs)
@@ -35,11 +34,6 @@ namespace UI.Desktop.View
                 var view = Instantiate(_programIconPrefab, _iconsHolder, false);
                 view.Init(program);
             }
-        }
-
-        public override void Dispose()
-        {
-            _viewModel.Dispose();
         }
     }
 }

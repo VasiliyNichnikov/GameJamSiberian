@@ -56,8 +56,7 @@ namespace UI.Desktop
                 Debug.LogError($"ProgramStorage.RemoveProgram: the program is not installed");
                 return;
             }
-
-            _installedPrograms[programType].Dispose();
+            
             _installedPrograms.Remove(programType);
             OnRemovedProgram?.Invoke(programType);
         }
