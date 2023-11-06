@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using UniRx;
 
 namespace UI.Programs.InstallerIDE.ViewModel
@@ -11,15 +12,18 @@ namespace UI.Programs.InstallerIDE.ViewModel
 
         private readonly ReactiveProperty<bool> _onChangeToggle = new ReactiveProperty<bool>();
 
-        public DeselectToggleViewModel(string description)
+        private readonly Action _onAdditionClickHandler;
+        public DeselectToggleViewModel(string description, Action onAdditionClickHandler)
         {
             Description = description;
             _onChangeToggle.Value = true;
+            _onAdditionClickHandler = onAdditionClickHandler;
         }
 
         public void OnToggleClickHandler()
         {
             _onChangeToggle.Value = !_onChangeToggle.Value;
+            _onAdditionClickHandler?.Invoke();
         }
     }
 }

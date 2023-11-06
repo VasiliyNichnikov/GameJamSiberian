@@ -1,5 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.Linq;
+using UniRx;
 
 namespace UI.Programs.InstallerIDE.ViewModel
 {
@@ -7,8 +9,11 @@ namespace UI.Programs.InstallerIDE.ViewModel
     {
         public string TitleText { get; }
         public string DescriptionText { get; }
+
+        public IReactiveProperty<bool> IsButtonVisible => _isButtonVisible;
         public IReadOnlyCollection<IDeselectToggleBlockViewModel> Toggles => _toggles;
-        
+
+        private readonly ReactiveProperty<bool> _isButtonVisible = new ReactiveProperty<bool>();
         private readonly List<DeselectToggleViewModel> _toggles = new List<DeselectToggleViewModel>();
 
         public DeselectTogglesViewModel()
@@ -19,13 +24,14 @@ namespace UI.Programs.InstallerIDE.ViewModel
             DescriptionText = data.DescriptionText;
             foreach (var item in togglesData)
             {
-                _toggles.Add(new DeselectToggleViewModel(item.Description));
+                _toggles.Add(new DeselectToggleViewModel(item.Description, CheckLevelExecution));
             }
         }
 
-        public List<DeselectToggleViewModel> GetToggles()
+        private void CheckLevelExecution()
         {
-            return _toggles;
+            _isButtonVisible.Value = _toggles.All(toggle => !toggle.OnChangeToggle.Value);
         }
+        
     }
 }
