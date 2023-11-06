@@ -7,6 +7,8 @@ namespace ProgramsLogic
 {
     public class IdeProgram : ProgramData
     {
+        public bool IsCompleted { get; private set; }
+        
         public override ProgramType Type => ProgramType.IDE;
 
         public IdeProgram(DesktopProgramContext context) : base(context)
@@ -16,7 +18,10 @@ namespace ProgramsLogic
         protected override void OnClickHandlerBase()
         {
             var dialog = Main.Instance.GuiManager.ShowDialog<QteMiniGameView>();
-            dialog.Init(new QteMiniGameViewModel());
+            dialog.Init(new QteMiniGameViewModel(), IsCompleted, () =>
+            {
+                IsCompleted = true;
+            });
             dialog.SetHideAction(CloseProgram);
             OpenProgram(dialog);
         }

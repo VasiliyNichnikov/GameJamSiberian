@@ -45,7 +45,9 @@ namespace Plot.MiniGame
 
         public void CompletePlot()
         {
-            // need release
+            // Добавляем клик для IDE 
+            var ideContext = DesktopProgramContext.Default().SetAllowProgramToRun();
+            _computerFacade.UpdateProgram(ProgramType.IDE, ideContext);
         }
     }
 }

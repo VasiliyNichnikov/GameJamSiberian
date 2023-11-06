@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UI.Programs.QTEMiniGame.VIewModel;
 using UnityEngine;
@@ -7,6 +8,10 @@ namespace UI.Programs.QTEMiniGame.View
 {
     public class QteMiniGameView : BaseDialog
     {
+        [SerializeField] private Color _orangeColor;
+        [SerializeField] private Color _greenColor;
+        [SerializeField] private Image _buttonImage;
+        
         public QteEditorView EditorView;
         public QteHolderView HolderView;
         public Button BuildButton;
@@ -23,23 +28,29 @@ namespace UI.Programs.QTEMiniGame.View
         
         private bool _isInitialized;
 
+        private bool _isCompleted;
         private IQteMiniGameViewModel _viewModel;
+        private Action _onCompleteMiniGame;
         
-        public void Init(IQteMiniGameViewModel viewModel)
+        public void Init(IQteMiniGameViewModel viewModel, bool isCompleted, Action onCompleteMiniGame)
         {
             _viewModel = viewModel;
+            _onCompleteMiniGame = onCompleteMiniGame;
             HolderView.Init();
             EditorView.Init(_viewModel.EditorViewModel);
 
             BuildButton.interactable = false;
+            
 
             _target = 0;
             _total = 0;
             
             _writer = StartCoroutine(EditorView.TextAnimationWrite());
 
+            _isCompleted = isCompleted;
             _isInitialized = true;
             StartCoroutine(KeyDown(true));
+            UpdateColorButton();
         }
         
         private void Update()
@@ -49,15 +60,20 @@ namespace UI.Programs.QTEMiniGame.View
                 return;
             }
             
-            if (EditorView.IsAllText)
+            if (EditorView.IsAllText || _isCompleted)
             {
                 if (!_viewModel.IsKeyNeed && HolderView.ButtonIsActive())
                 {
                     HolderView.HideButton();
                 }
 
-                if(!BuildButton.interactable)
+                if (!BuildButton.interactable)
+                {
+                    _isCompleted = true;
+                    _onCompleteMiniGame?.Invoke();
+                    UpdateColorButton();
                     BuildButton.interactable = true;
+                }
                 return;
             }
             
@@ -142,9 +158,14 @@ namespace UI.Programs.QTEMiniGame.View
             _timeIsOut = true;
         }
 
+        private void UpdateColorButton()
+        {
+            _buttonImage.color = _isCompleted ? _greenColor : _orangeColor;
+        }
+
         public void OnBuildButtonClick()
         {
-            // TODO: выход из мини-игры
+            Hide();
         }
     }
 }

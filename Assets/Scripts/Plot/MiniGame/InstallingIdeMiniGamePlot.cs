@@ -45,7 +45,7 @@ namespace Plot.MiniGame
         public void CompletePlot()
         {
             // Устанавливаем Ide на рабочий стол
-            var context = DesktopProgramContext.Default().SetAllowProgramToRun();
+            var context = DesktopProgramContext.Default();
             _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.IDE, context));
             
             // Добавляем клик для Trello (Браузер)
