@@ -23,8 +23,8 @@ namespace UI.Programs.InstallerIDE.View
             _toggle.onValueChanged.AddListener(OnToggleClicked);
         }
         
-        private void OnToggleClicked(bool isOn) => _viewModel.OnToggleClickHandler();
+        private void OnToggleClicked(bool isOn) => _viewModel.OnToggleClickHandler(); // 1
         
-        private void ChangeValue(bool value) => _toggle.isOn = value;
+        private void ChangeValue(bool value) => _toggle.isOn = value; // 3 
     }
 }

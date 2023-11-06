@@ -7,7 +7,7 @@ namespace UI.Programs.InstallerIDE.ViewModel
     {
         public string Description { get; }
         
-        public IReactiveProperty<bool> OnChangeToggle => _onChangeToggle;
+        public IReactiveProperty<bool> OnChangeToggle => _onChangeToggle; // подписаться на эти обновления
 
         private readonly ReactiveProperty<bool> _onChangeToggle = new ReactiveProperty<bool>();
 
@@ -17,7 +17,7 @@ namespace UI.Programs.InstallerIDE.ViewModel
             _onChangeToggle.Value = true;
         }
 
-        public void OnToggleClickHandler()
+        public void OnToggleClickHandler() // 2
         {
             _onChangeToggle.Value = !_onChangeToggle.Value;
         }

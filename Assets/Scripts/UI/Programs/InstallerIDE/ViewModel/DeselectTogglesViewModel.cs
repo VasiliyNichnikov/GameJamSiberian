@@ -1,5 +1,7 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using System.Linq;
+using UniRx;
 
 namespace UI.Programs.InstallerIDE.ViewModel
 {
@@ -26,6 +28,13 @@ namespace UI.Programs.InstallerIDE.ViewModel
         public List<DeselectToggleViewModel> GetToggles()
         {
             return _toggles;
+        }
+
+        public IReactiveProperty<bool> OnAllDeselected => _onAllDeselected;
+        private readonly ReactiveProperty<bool> _onAllDeselected = new ReactiveProperty<bool>();
+        public void UpdateDeselect()
+        {
+            _onAllDeselected.Value = GetToggles().All(toggle => !toggle.OnChangeToggle.Value);
         }
     }
 }

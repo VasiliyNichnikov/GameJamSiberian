@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System.Collections.Generic;
+using UniRx;
 
 namespace UI.Programs.InstallerIDE.ViewModel
 {
@@ -8,5 +9,6 @@ namespace UI.Programs.InstallerIDE.ViewModel
         string TitleText { get; }
         string DescriptionText { get; }
         IReadOnlyCollection<IDeselectToggleBlockViewModel> Toggles { get; }
+        IReactiveProperty<bool> OnAllDeselected { get; }
     }
 }

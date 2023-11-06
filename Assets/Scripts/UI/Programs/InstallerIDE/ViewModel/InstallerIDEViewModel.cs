@@ -66,6 +66,12 @@ namespace UI.Programs.InstallerIDE.ViewModel
                     {
                         _currentState = PageState.DeselectToggles;
                     }
+                    else
+                    {
+                        // TODO: Вызов диалога ошибки, если выбран неправильный диск
+                        //var dialog = Main.Instance.GuiManager.ShowDialog<ErrorView>();
+                        //dialog.Init("Ошибка!", "На выбранном Вами диске не хватает места");
+                    }
                     break;
                 case PageState.DeselectToggles:
                     var missionIsCompleteDeselectToggles = _deselectTogglesViewModel.GetToggles().All(toggle => !toggle.OnChangeToggle.Value);
