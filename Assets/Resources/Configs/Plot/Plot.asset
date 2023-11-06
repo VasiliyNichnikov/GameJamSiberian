@@ -31,9 +31,21 @@ MonoBehaviour:
     _blackScreenData: {fileID: 0}
   - _plotType: 0
     _miniGameData: {fileID: 0}
-    _messengerData: {fileID: 11400000, guid: 7b9bce6f8502db741a061898d67d8329, type: 2}
+    _messengerData: {fileID: 11400000, guid: f66715cc214bc80418e0b65a3599e2b1, type: 2}
     _blackScreenData: {fileID: 0}
   - _plotType: 1
     _miniGameData: {fileID: 11400000, guid: 5b7e8e6e75bf11d4bb60aabd28b6e82f, type: 2}
     _messengerData: {fileID: 0}
+    _blackScreenData: {fileID: 0}
+  - _plotType: 0
+    _miniGameData: {fileID: 11400000, guid: 5b7e8e6e75bf11d4bb60aabd28b6e82f, type: 2}
+    _messengerData: {fileID: 11400000, guid: 7b9bce6f8502db741a061898d67d8329, type: 2}
+    _blackScreenData: {fileID: 0}
+  - _plotType: 1
+    _miniGameData: {fileID: 0}
+    _messengerData: {fileID: 11400000, guid: 7b9bce6f8502db741a061898d67d8329, type: 2}
+    _blackScreenData: {fileID: 0}
+  - _plotType: 0
+    _miniGameData: {fileID: 0}
+    _messengerData: {fileID: 11400000, guid: da75453fe0e830545a5d592fd9f227f7, type: 2}
     _blackScreenData: {fileID: 0}
