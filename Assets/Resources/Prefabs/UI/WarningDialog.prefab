@@ -819,7 +819,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7116368891547406474}
         m_TargetAssemblyTypeName: UI.BaseDialog, Assembly-CSharp
         m_MethodName: Hide
         m_Mode: 1
@@ -885,6 +885,7 @@ MonoBehaviour:
   _description: {fileID: 8826132623795885919}
   _togglesHolder: {fileID: 0}
   _deselectToggleBlockPrefab: {fileID: 92076554218690625, guid: facf28d031d93bb4883e4a73d678aa2f, type: 3}
+  _continueButtonContinue: {fileID: 0}
 --- !u!1001 &6817551713517912215
 PrefabInstance:
   m_ObjectHideFlags: 0
