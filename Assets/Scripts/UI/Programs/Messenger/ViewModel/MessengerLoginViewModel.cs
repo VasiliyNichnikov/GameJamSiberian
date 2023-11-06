@@ -19,16 +19,16 @@ namespace UI.Programs.Messenger.ViewModel
             _rightPassword = data.RightPassword;
         }
         
-        public void TryToLogInChat(string login, string password)
+        public bool TryToLogInChat(string login, string password)
         {
             // Вход выполнен
             if (login == _rightLogin && password == _rightPassword)
             {
                 _onCompleteLogin.Invoke();
-                return;
+                return true;
             }
-
-            Debug.LogWarning("MessengerLoginViewModel.TryToLogInChat: доделать окно с информацией что пароль/логин не подошли");
+            
+            return false;
         }
     }
 }
