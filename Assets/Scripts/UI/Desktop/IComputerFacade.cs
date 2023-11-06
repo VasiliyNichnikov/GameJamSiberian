@@ -9,6 +9,8 @@ namespace UI.Desktop
     /// </summary>
     public interface IComputerFacade
     {
+        bool IsProgramInstalled(ProgramType program);
+        
         void InstallProgram(ProgramData program);
         void UpdateProgram(ProgramType programType, DesktopProgramContext context);
         void RemoveProgram(ProgramData program);

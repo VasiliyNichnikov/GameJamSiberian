@@ -2,6 +2,7 @@
 using UI.Desktop;
 using UI.Programs.InstallerIDE.View;
 using UI.Programs.InstallerIDE.ViewModel;
+using UnityEngine;
 
 namespace ProgramsLogic
 {
@@ -20,6 +21,12 @@ namespace ProgramsLogic
 
         protected override void OnClickHandlerBase()
         {
+            if (Main.Instance.ComputerFacade.IsProgramInstalled(ProgramType.IDE))
+            {
+                Debug.LogWarning("InstallerIdeProgram.OnClickHandlerBase: program is already installed");
+                return;
+            }
+            
             var dialog = Main.Instance.GuiManager.ShowDialog<InstallerIDEDialog>();
             dialog.Init(new InstallerIDEViewModel(dialog.Hide));
             dialog.SetHideAction(() =>

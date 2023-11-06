@@ -20,7 +20,9 @@ namespace UI.Desktop
         {
             _clicksController = clicksController;
         }
-        
+
+        public bool IsProgramInstalled(ProgramType program) => _storage.TryGetProgram(program, out _);
+
         /// <summary>
         /// Установка программы
         /// </summary>

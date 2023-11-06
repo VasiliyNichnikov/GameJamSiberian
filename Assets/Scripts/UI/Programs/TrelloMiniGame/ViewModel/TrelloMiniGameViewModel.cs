@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -13,20 +12,20 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
         public IReactiveProperty<bool> IsCompleted => _isCompleted;
         public ReadOnlyCollection<ITrelloColumnViewModel> Columns => _columns.Cast<ITrelloColumnViewModel>().ToList().AsReadOnly();
 
-        private readonly ReactiveProperty<bool> _isCompleted = new ReactiveProperty<bool>();
+        private readonly ReactiveProperty<bool> _isCompleted = new ();
         private readonly List<TrelloColumnViewModel> _columns = new();
-        private readonly Action _onHideDialog;
         
-        public TrelloMiniGameViewModel(Action hideDialog, bool isCompleted)
+        private readonly TrelloMiniGameManager _trelloManager;
+        
+        public TrelloMiniGameViewModel(TrelloMiniGameManager trelloManager)
         {
-            var data = DataHelper.Instance.TrelloMiniGameData;
-            _columns.Add(new TrelloColumnViewModel(data.FirstColumnData, this, 0));
-            _columns.Add(new TrelloColumnViewModel(data.SecondColumnData, this, 1));
-            _columns.Add(new TrelloColumnViewModel(data.ThirdColumnData, this, 2));
-            _columns.Add(new TrelloColumnViewModel(data.FourthColumnData, this, 3));
+            _trelloManager = trelloManager;
+            _columns.Add(new TrelloColumnViewModel(trelloManager.FirstColumnData, trelloManager,this, 0));
+            _columns.Add(new TrelloColumnViewModel(trelloManager.SecondColumnData, trelloManager,this, 1));
+            _columns.Add(new TrelloColumnViewModel(trelloManager.ThirdColumnData, trelloManager,this, 2));
+            _columns.Add(new TrelloColumnViewModel(trelloManager.FourthColumnData, trelloManager,this, 3));
 
-            _isCompleted.Value = isCompleted;
-            _onHideDialog = hideDialog;
+            _isCompleted.Value = trelloManager.IsCompleted;
         }
 
         public void OnChangeTaskColumn(int currentColumnIndex, int nextColumnIndex, TrelloTaskViewModel taskViewModel)
@@ -52,13 +51,17 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
                 Debug.LogError(
                     $"TrelloMiniGameViewModel.OnChangeTaskColumn: Couldn't add to column {nextColumnIndex}");
             }
+
+            _trelloManager.OnChangeTaskColumn(currentColumnIndex, nextColumnIndex, taskViewModel.TaskId);
         }
+        
         
         public void OnClickSaveDataHandler()
         {
             if (_columns.All(column => column.IsLocationTasksCorrected))
             {
-                _onHideDialog.Invoke();
+                _trelloManager.OnCompleteMiniGame();
+                _isCompleted.Value = true;
             }
             else
             {

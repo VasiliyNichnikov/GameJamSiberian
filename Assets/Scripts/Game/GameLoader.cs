@@ -29,7 +29,7 @@ namespace Game
             // Открываем рабочий стол
             _computerFacade.OpenDesktop();
             // Устанавливаем браузер без возможности в него попасть
-            _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.IzbaSurf, DesktopProgramContext.Default()));
+            _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.IzbaSurf, DesktopProgramContext.Default().SetAllowProgramToRun()));
             // Устанавливаем мессенджер с возможностью в него попасть
             _computerFacade.InstallProgram(ProgramFactory.CreateProgram(ProgramType.Swallow, DesktopProgramContext.Default().SetAllowProgramToRun()));
             // Устанавливаем файл PDF

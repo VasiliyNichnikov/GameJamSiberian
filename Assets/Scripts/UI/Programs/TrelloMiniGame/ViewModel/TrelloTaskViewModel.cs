@@ -9,6 +9,7 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
 {
     public class TrelloTaskViewModel : ITrelloTaskViewModel
     {
+        public int TaskId { get; }
         public int ColumnNumber { get; private set; }
         public string Title => _data.Title;
         public string Description => _data.Description;
@@ -31,9 +32,10 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
 
         private readonly TrelloMiniGameData.TaskData _data;
         
-        public TrelloTaskViewModel(TrelloMiniGameData.TaskData data, Action<int, int, TrelloTaskViewModel> onClickArrowsHandler, int columnNumber)
+        public TrelloTaskViewModel(int taskId, TrelloMiniGameData.TaskData data, Action<int, int, TrelloTaskViewModel> onClickArrowsHandler, int columnNumber)
         {
             _data = data;
+            TaskId = taskId;
             ColumnNumber = columnNumber;
             Tags = data.Tags.Select(ConvertTag).ToList();
             var userData = DataHelper.Instance.TrelloMiniGameData.GetUserByType(data.User);

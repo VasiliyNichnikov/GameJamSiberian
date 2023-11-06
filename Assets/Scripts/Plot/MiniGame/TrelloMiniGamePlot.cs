@@ -2,6 +2,7 @@
 using Configs;
 using ProgramsLogic;
 using UI.Desktop;
+using UI.Programs.TrelloMiniGame;
 using UnityEngine;
 
 namespace Plot.MiniGame
@@ -9,7 +10,7 @@ namespace Plot.MiniGame
     public class TrelloMiniGamePlot : IMiniGamePlot
     {
         private readonly IComputerFacade _computerFacade;
-        private IzbaSerfProgram? _browser;
+        private ITrelloMiniGameManager? _trelloMiniGameManager;
         
         public TrelloMiniGamePlot(IComputerFacade computerFacade)
         {
@@ -27,19 +28,19 @@ namespace Plot.MiniGame
 
             if (program is IzbaSerfProgram browser)
             {
-                _browser = browser;
+                _trelloMiniGameManager = browser.TrelloMiniGameManager;
             }
         }
 
         public bool CheckCompletionCondition()
         {
-            if (_browser == null)
+            if (_trelloMiniGameManager == null)
             {
-                Debug.LogError("TrelloMiniGamePlot.CheckCompletionCondition: browser is null");
+                Debug.LogError("TrelloMiniGamePlot.CheckCompletionCondition: trelloMiniGameManager is null");
                 return false;
             }
             
-            return _browser.IsCompleted;
+            return _trelloMiniGameManager.IsCompleted;
         }
 
         public void CompletePlot()

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Configs;
 using UniRx;
+using UnityEngine;
 
 namespace UI.Programs.TrelloMiniGame.ViewModel
 {
@@ -20,10 +21,17 @@ namespace UI.Programs.TrelloMiniGame.ViewModel
         private readonly List<TrelloTaskViewModel> _tasks;
         private readonly int _columnNumber;
 
-        public TrelloColumnViewModel(TrelloMiniGameData.ColumnData data, TrelloMiniGameViewModel miniGameViewModel, int columnNumber)
+        public TrelloColumnViewModel(TrelloMiniGameData.ColumnData data,  TrelloMiniGameManager manager, TrelloMiniGameViewModel miniGameViewModel, int columnNumber)
         {
             TitleColumn = data.TitleText;
-            _tasks = data.Tasks.Select(taskData => new TrelloTaskViewModel(taskData, miniGameViewModel.OnChangeTaskColumn, columnNumber)).ToList();
+
+            _tasks = new List<TrelloTaskViewModel>();
+            foreach (var taskId in manager.GetCurrentLocationOfTasks(columnNumber))
+            {
+                var taskData = manager.GetTaskDataById(taskId);
+                _tasks.Add(new TrelloTaskViewModel(taskId, taskData, miniGameViewModel.OnChangeTaskColumn, columnNumber));
+            }
+            
             _tasksProp.Value = _tasks.Cast<ITrelloTaskViewModel>().ToList().AsReadOnly();
             _columnNumber = columnNumber;
         }
