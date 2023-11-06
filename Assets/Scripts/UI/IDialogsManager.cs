@@ -7,5 +7,10 @@ namespace UI
         // Костыль
         BluerDialog ShowBluer();
         T ShowDialog<T>() where T : BaseDialog;
+
+        /// <summary>
+        /// Закрывает все активные диалоги
+        /// </summary>
+        void HideAllActiveDialogs();
     }
 }

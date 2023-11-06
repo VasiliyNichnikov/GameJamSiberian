@@ -15,8 +15,8 @@ namespace ProgramsLogic
         protected override void OnClickHandlerBase()
         {
             var dialog = Main.Instance.GuiManager.ShowDialog<PDFDialog>();
-            dialog.SetHideAction(State.Close);
-            State.Open();
+            dialog.SetHideAction(CloseProgram);
+            OpenProgram(dialog);
         }
     }
 

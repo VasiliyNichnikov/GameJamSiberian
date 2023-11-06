@@ -24,8 +24,8 @@ namespace ProgramsLogic
         {
             var dialog = Main.Instance.GuiManager.ShowDialog<TrelloMiniGameDialog>();
             dialog.Init(new TrelloMiniGameViewModel(_trelloMiniGameManager));
-            dialog.SetHideAction(State.Close);
-            State.Open();
+            dialog.SetHideAction(CloseProgram);
+            OpenProgram(dialog);
         }
     }
 }

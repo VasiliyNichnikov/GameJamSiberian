@@ -22,8 +22,8 @@ namespace ProgramsLogic
             {
                 IsCompleted = true;
             });
-            dialog.SetHideAction(State.Close);
-            State.Open();
+            dialog.SetHideAction(CloseProgram);
+            OpenProgram(dialog);
         }
     }
 }

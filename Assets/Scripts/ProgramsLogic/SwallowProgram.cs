@@ -24,15 +24,10 @@ namespace ProgramsLogic
 
         protected override void OnClickHandlerBase()
         {
-            if (State.IsOpened)
-            {
-                return;
-            }
-
             var dialog = Main.Instance.GuiManager.ShowDialog<MessengerDialog>();
             dialog.Init(new MessengerViewModel(_manager));
-            dialog.SetHideAction(State.Close);
-            State.Open();
+            dialog.SetHideAction(CloseProgram);
+            OpenProgram(dialog);
         }
     }
 }

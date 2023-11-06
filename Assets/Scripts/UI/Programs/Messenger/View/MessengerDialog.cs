@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using UI.Programs.Messenger.ViewModel;
-using UniRx;
 using UnityEngine;
 using Utils;
 
@@ -37,6 +36,11 @@ namespace UI.Programs.Messenger.View
                     _chatView.Init(_viewModel.ChatViewModel);
                 }
             });
+        }
+
+        public override void Dispose()
+        {
+            _chatView.Dispose();
         }
     }
 }
