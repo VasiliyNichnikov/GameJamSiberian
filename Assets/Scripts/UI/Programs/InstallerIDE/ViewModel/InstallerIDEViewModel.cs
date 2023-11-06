@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using UniRx;
 using UnityEngine;
+using Utils;
 
 namespace UI.Programs.InstallerIDE.ViewModel
 {
@@ -66,9 +67,13 @@ namespace UI.Programs.InstallerIDE.ViewModel
                     {
                         _currentState = PageState.DeselectToggles;
                     }
+                    else
+                    {
+                        SimpleDialogsHelper.OpenWarningDialog("Сторож", "Свободное место не найдено");
+                    }
                     break;
                 case PageState.DeselectToggles:
-                    var missionIsCompleteDeselectToggles = _deselectTogglesViewModel.GetToggles().All(toggle => !toggle.OnChangeToggle.Value);
+                    var missionIsCompleteDeselectToggles = _deselectTogglesViewModel.Toggles.All(toggle => !toggle.OnChangeToggle.Value);
                     if (missionIsCompleteDeselectToggles)
                     {
                         _currentState = PageState.Installation;
