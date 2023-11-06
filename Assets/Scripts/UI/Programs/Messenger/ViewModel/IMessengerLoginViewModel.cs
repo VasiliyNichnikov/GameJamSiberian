@@ -2,6 +2,6 @@
 {
     public interface IMessengerLoginViewModel
     {
-        void TryToLogInChat(string login, string password);
+        bool TryToLogInChat(string login, string password);
     }
 }
