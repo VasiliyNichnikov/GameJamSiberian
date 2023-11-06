@@ -28,6 +28,9 @@ namespace Plot
                 case MiniGameType.Trello:
                     _miniGamePlot = new TrelloMiniGamePlot(computerFacade);
                     break;
+                case MiniGameType.QteCode:
+                    _miniGamePlot = new QteMiniGamePlot(computerFacade);
+                    return;
                 default:
                     Debug.LogError($"MiniGamePlotComponent: not supported type: {_miniGamePlot}");
                     _miniGamePlot = new EmptyMiniGame();
