@@ -22,9 +22,9 @@ namespace UI
             { typeof(InstallerIDEDialog), "Prefabs/UI/InstallerIDE/InstallerIdeDialog" },
             { typeof(PDFDialog), "Prefabs/UI/PDF/PDFDialog" },
             { typeof(BluerDialog), "Prefabs/UI/BluerDialog" },
-            {typeof(ErrorDialog), "Prefabs/UI/Desktop/ErrorDialog"}
+            { typeof(WarningDialog), "Prefabs/UI/Desktop/ErrorDialog" }
         };
-        
+
         public T CreateDialog<T>(Transform parentDialog) where T : BaseDialog
         {
             if (!_dialogsPath.TryGetValue(typeof(T), out var path))
