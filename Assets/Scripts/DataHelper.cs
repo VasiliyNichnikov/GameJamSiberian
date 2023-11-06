@@ -12,6 +12,7 @@ public class DataHelper: MonoBehaviour
     public ProgramsIconData ProgramsIconData => _programsIconData;
     public PlotData PlotData => _plotData;
     public InstallerMiniGameData InstallerData => _installerMiniGameData;
+    public PDFDataFiller PdfDataFiller => _pdfDataFiller;
     
     [SerializeField] private MessengerData _messengerData = null!;
     [SerializeField] private TrelloMiniGameData _trelloMiniGameData = null!;

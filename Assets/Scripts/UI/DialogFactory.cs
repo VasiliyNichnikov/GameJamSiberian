@@ -19,7 +19,7 @@ namespace UI
             { typeof(TrelloMiniGameDialog), "Prefabs/UI/TrelloMiniGame/TrelloMiniGameDialog" },
             { typeof(DesktopDialog), "Prefabs/UI/Desktop/DesktopDialog" },
             { typeof(InstallerIDEDialog), "Prefabs/UI/InstallerIDE/InstallerIdeDialog" },
-            { typeof(PDFDialog), "Prefabs/UI/PDF/PDFBase" },
+            { typeof(PDFDialog), "Prefabs/UI/PDF/PDFDialog" },
         };
 
         private readonly Transform _parentDialogs;
